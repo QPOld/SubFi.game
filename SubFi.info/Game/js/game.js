@@ -8,6 +8,8 @@
 	The game starts with boot.
 
 	NOTES:
+		Verison Control:
+			Each commit should have its own version id. This will allow for eaiser debug.
 		Resolution options:
 			1920x1080
 			1280x720
@@ -28,6 +30,7 @@
 		--> Create change resolution option in the settingsState
 		--> Redo all art in new resolution mode.
 		--> All art will become default game art.
+		--> Buttons can not be tabbed through like basic html/css buttons.
 
  */
 var game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
