@@ -11,12 +11,12 @@ The server will eventually be migrated to a 3rd party hosting company upon final
 The game is in a very early alpha stage.
 
 ## Roadmap
-In Progress...
+This section will be updated soon!
 
 ### Usage
-node testserver.js Game/
-mongod --dbpath=data/
-firefox localhost:4242/html/index.html
+* node testserver.js Game/
+* mongod --dbpath=data/
+* firefox localhost:4242/html/index.html
 
 > **Note:**
 > - The entire game is being rewritten with the Phaser.io framework.
