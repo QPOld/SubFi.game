@@ -1,13 +1,15 @@
 var loginState = {
 	
 	create: function(){
+		
 		loginState.loginForm();
-		// game.state.start('menu');
 		console.log('loginState Complete.');
 	},
 	loginForm: function(){
-		var loginBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'loginBackgroundScreen');
-		var user = game.add.inputField(loadState.width / 2, loadState.height/2, {
+		var tabKey = this.game.input.keyboard.addKey(Phaser.Keyboard.TAB);
+		tabKey.onDown.add(loginState.switchFocus, this);
+		loginBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'loginBackgroundScreen');
+		user = game.add.inputField(loadState.width / 2+150, loadState.height/2, {
 		                font: '18px Arial',
 		                fill: '#212121',
 		                fillAlpha: 1,
@@ -23,7 +25,7 @@ var loginState = {
 		                zoom: true
 		            });
 		            user.blockInput = false;
-		var password = game.add.inputField(loadState.width/2, loadState.height/2 + 100, {
+		password = game.add.inputField(loadState.width/2+150, loadState.height/2 + 100, {
 		                font: '18px Arial',
 		                fill: '#212121',
 		                fillAlpha: 1,
@@ -37,6 +39,21 @@ var loginState = {
 		                type: Fabrique.InputType.password,
 		                zoom: true
 		            });
-		            password.focusOutOnEnter = false;
+					password.blockInput = false;
+		submitButton = game.add.button(loadState.width/2+150, loadState.height/2 + 150, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
 	},
+	goToMenuScreen: function(){
+		game.state.start('menu');
+	},
+	switchFocus: function(){
+		if(user.focus === true && password.focus === false){
+			user.endFocus();
+			password.endFocus();
+			password.startFocus();
+		} else {
+			user.endFocus();
+			password.endFocus();
+			user.startFocus();
+		}
+	}
 };

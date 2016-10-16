@@ -10,6 +10,7 @@
 	NOTES:
 		Resolution options:
 			1920x1080
+			1280x720
 			1366:768
 			The aspect ratio is approximately equal. ~1.77
 		Game Art:
@@ -29,7 +30,7 @@
 		--> All art will become default game art.
 
  */
-var game = new Phaser.Game(1920,1080, Phaser.AUTO, 'gameDiv');
+var game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
 
 game.state.add('boot',bootState);
 game.state.add('load',loadState);

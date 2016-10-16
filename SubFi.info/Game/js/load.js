@@ -27,9 +27,6 @@ var loadState = {
 	},
 	width:bootState.width,
 	height:bootState.height,
-	loadingScreen: function(){
-		var loadingLabel = game.add.text(loadState.width/2,loadState.height/2,'Loading...',{font:'30px Courier'})
-	},
 	init: function() {
 		game.canvas.oncontextmenu = function () {return false}
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -43,10 +40,13 @@ var loadState = {
 		game.canvas.style.height= window.innerHeight-1+"px";
 		game.scale.refresh();
 	},
+	loadingScreen: function(){
+		var loadingLabel = game.add.text(loadState.width/2,loadState.height/2,'Loading...',{font:'30px Courier'})
+	},
 	loginScreen: function(){
 		game.load.image('loginBackgroundScreen','../assets/loginBackgroundScreen.png');
+		game.load.image('submitButton', '../assets/submitButton.png')
 	},
-	
 	mainScreen: function() {
 		game.load.image('mainBackgroundScreen', '../assets/mainBackgroundScreen.png');
 		game.load.image('fullScreenButton', '../assets/fullScreenButton.png');
@@ -56,7 +56,6 @@ var loadState = {
 		game.load.image('skillButton', '../assets/skillButton.png');
 		game.load.image('inventoryButton', '../assets/inventoryButton.png');
 		game.load.image('rankButton', '../assets/rankButton.png');
-		game.load.spritesheet('fireAnimation', '../assets/FireAnimation.png', 32, 32, 128);
 	},
 	settingsScreen: function(){
 		game.load.image('settingsBackgroundScreen', '../assets/settingsBackgroundScreen.png');

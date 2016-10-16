@@ -14,7 +14,7 @@ var bootState = {
 		game.state.start('load');
 		console.log('bootState Complete.');
 	},
-	width:1920,
-	height:1080,
+	width:1280,
+	height:720,
 	
 };

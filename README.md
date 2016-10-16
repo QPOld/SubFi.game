@@ -20,8 +20,8 @@ firefox localhost:4242/html/index.html
 
 > **Note:**
 > - The entire game is being rewritten with the Phaser.io framework.
-> - All game art will be recreated with default open source art.
 > - Account creation will be closed until the next open alpha test.
+> - Placeholder images will be used until live alpha/beta.
 
 Credits
 -------

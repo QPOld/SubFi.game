@@ -11,12 +11,12 @@ var menuState = {
 	menuScreen: function () {
 			mainBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'mainBackgroundScreen');
 			fullScreenButton = game.add.button(loadState.width - 72, 28, 'fullScreenButton', menuState.goFullScreen, this, 2, 1, 0);
-			settingsButton = game.add.button(loadState.width - 133, 28, 'settingsButton',menuState.goToSettingsScreen , this, 2, 1, 0);
-			chatButton = game.add.button(loadState.width - 197, 25, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
-			skillButton = game.add.button(loadState.width - 258, 23, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
+			settingsButton = game.add.button(loadState.width - 144, 28, 'settingsButton',menuState.goToSettingsScreen , this, 2, 1, 0);
+			chatButton = game.add.button(loadState.width - 216, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
+			skillButton = game.add.button(loadState.width - 288, 28, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
 			matchButton = game.add.button(15, 15, 'matchButton', menuState.goToMatchScreen, this, 2, 1, 0);
-			inventoryButton = game.add.button(loadState.width - 317, 25, 'inventoryButton', menuState.goToInventoryScreen, this, 2, 1, 0);
-			rankButton = game.add.button(loadState.width - 377, 25, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
+			inventoryButton = game.add.button(loadState.width - 360, 28, 'inventoryButton', menuState.goToInventoryScreen, this, 2, 1, 0);
+			rankButton = game.add.button(loadState.width - 432, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
 			
 	},
 	goFullScreen: function() {
@@ -41,7 +41,7 @@ var menuState = {
 		game.debug.text( "Chat Screen Hit", 300, 480);
 	},
 	goToSkillScreen: function(){
-		game.debug.text("Skill Screen Hit", 300,480)
+		game.debug.text("Skill Screen Hit", 300,480);
 	},
 	goToInventoryScreen: function(){
 		game.debug.text( "Invetory Screen Hit", 300, 480);
