@@ -1,5 +1,7 @@
+Welcome to SubFi!
+===================
 # SubFi.game 
-Early Alpha Stage
+Early alpha stage of a turn based mmo.
 
-## Notes
-Game is being refactored in Phaser.io
+> **Note:**
+> - Game is being rewritten in Phaser.io
