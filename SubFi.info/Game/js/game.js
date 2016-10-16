@@ -12,7 +12,6 @@
 			1920x1080
 			1366:768
 			The aspect ratio is approximately equal. ~1.77
-			--> Create change resolution option in the settingsState
 		Game Art:
 			All game art must be updated to the new resolution options.
 			Create default game art. Similar to the counter strike sdk default material 
@@ -24,13 +23,10 @@
 		Database:
 			The fastest database that can return at least 60 updates a second from a 
 			single user. This may not happen but the goal is speed. Possible MongoDb.
-		User Input:
-			Phaser-Input plug is not loading correctly. The user input aspect may need
-			to change or be dropped completely. This means there will be no chat and
-			user login much be done on seperate html file. Also this may lead to
-			conflicting php session data. This is dependent upon the use of MongoDB
-			and phasing out of php. The goal is 100% js.
-			--> Remove phaser-input as of right now.
+	Issues:
+		--> Create change resolution option in the settingsState
+		--> Redo all art in new resolution mode.
+		--> All art will become default game art.
 
  */
 var game = new Phaser.Game(1920,1080, Phaser.AUTO, 'gameDiv');
