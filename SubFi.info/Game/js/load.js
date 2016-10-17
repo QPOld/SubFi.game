@@ -14,6 +14,7 @@ var loadState = {
 		loadState.loadingScreen();
 		loadState.init();
 		loadState.loginScreen();
+		loadState.registerScreen();
 		loadState.mainScreen();
 		loadState.settingsScreen();
 		loadState.chatScreen();
@@ -46,6 +47,10 @@ var loadState = {
 	loginScreen: function(){
 		game.load.image('loginBackgroundScreen','../assets/loginBackgroundScreen.png');
 		game.load.image('submitButton', '../assets/submitButton.png')
+		game.load.image('registerButton', '../assets/registerButton.png')
+	},
+	registerScreen: function(){
+		game.load.image('registerBackgroundScreen','../assets/registerBackgroundScreen.png');
 	},
 	mainScreen: function() {
 		game.load.image('mainBackgroundScreen', '../assets/mainBackgroundScreen.png');
@@ -56,6 +61,7 @@ var loadState = {
 		game.load.image('skillButton', '../assets/skillButton.png');
 		game.load.image('inventoryButton', '../assets/inventoryButton.png');
 		game.load.image('rankButton', '../assets/rankButton.png');
+		game.load.image('characterButton', '../assets/characterButton.png')
 	},
 	settingsScreen: function(){
 		game.load.image('settingsBackgroundScreen', '../assets/settingsBackgroundScreen.png');

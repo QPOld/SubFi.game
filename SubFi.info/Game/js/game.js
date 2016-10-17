@@ -37,6 +37,7 @@
 		--> Redo all art in new resolution mode.
 		--> All art will become default game art.
 		--> Buttons can not be tabbed through like basic html/css buttons.
+		--> Develope CRUD for MongoDb.
 
  */
 var game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
@@ -44,10 +45,12 @@ var game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
 game.state.add('boot',bootState);
 game.state.add('load',loadState);
 game.state.add('login',loginState);
+game.state.add('register',registerState);
 game.state.add('menu',menuState);
 game.state.add('settings',settingsState);
 game.state.add('chat',chatState);
 game.state.add('skill',skillState);
+game.state.add('character',characterState);
 game.state.add('inventory',inventoryState);
 game.state.add('match',matchState);
 

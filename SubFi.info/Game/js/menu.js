@@ -17,6 +17,7 @@ var menuState = {
 			matchButton = game.add.button(15, 15, 'matchButton', menuState.goToMatchScreen, this, 2, 1, 0);
 			inventoryButton = game.add.button(loadState.width - 360, 28, 'inventoryButton', menuState.goToInventoryScreen, this, 2, 1, 0);
 			rankButton = game.add.button(loadState.width - 432, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
+			characterButton = game.add.button(loadState.width - 504, 28, 'characterButton', menuState.goToCharacterScreen, this, 2, 1, 0);
 			
 	},
 	goFullScreen: function() {
@@ -52,5 +53,8 @@ var menuState = {
 	goToRankScreen: function(){
 		game.debug.text( "Rank Screen Hit", 300, 480);
 
+	},
+	goToCharacterScreen: function(){
+		game.debug.text("Character Screen Hit",300,480)
 	},
 }

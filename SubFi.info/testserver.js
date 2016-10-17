@@ -49,6 +49,15 @@ app.get('/login',function(req,res){
 		}
 	});
 });
+app.get('/register',function(req,res){
+	var email = req.query['email'];
+	var user = req.query['id'];
+	var pass = req.query['pass'];
+	var collection = db.get('usercollection');
+	collection.insert({'username': user,'password':pass,'email':email});
+});
+
+
 io.on('connection', function(socket){
   console.log('connect');
   socket.on('disconnect', function(){
