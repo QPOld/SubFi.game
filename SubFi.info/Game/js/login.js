@@ -8,8 +8,6 @@ var loginState = {
 	loginForm: function(){
 		var tabKey = game.input.keyboard.addKey(Phaser.Keyboard.TAB);
 		tabKey.onDown.add(loginState.switchFocus, this);
-		var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-		enterKey.onDown.add(loginState.quickSubmit, this);
 		loginBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'loginBackgroundScreen');
 		user = game.add.inputField(loadState.width / 2+150, loadState.height/2, {
 		                font: '18px Arial',
@@ -17,6 +15,7 @@ var loginState = {
 		                fillAlpha: 1,
 		                fontWeight: 'bold',
 		                width: 150,
+						height: 25,
 		                max: 24,
 		                padding: 8,
 		                borderWidth: 1,
@@ -33,11 +32,13 @@ var loginState = {
 		                fillAlpha: 1,
 		                fontWeight: 'bold',
 		                width: 150,
+						height: 25,
 		                padding: 8,
 		                borderWidth: 1,
 		                borderColor: '#000',
 		                borderRadius: 1,
 		                placeHolder: 'Password',
+						textAlign: 'center',
 		                type: Fabrique.InputType.password,
 		                zoom: true
 		            });
@@ -56,11 +57,6 @@ var loginState = {
 			user.endFocus();
 			password.endFocus();
 			user.startFocus();
-		}
-	},
-	quickSubmit: function(){
-		if(password.focus === true){
-			loginState.catchError();
 		}
 	},
 	catchError: function(){
