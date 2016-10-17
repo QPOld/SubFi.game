@@ -6,8 +6,10 @@ var loginState = {
 		console.log('loginState Complete.');
 	},
 	loginForm: function(){
-		var tabKey = this.game.input.keyboard.addKey(Phaser.Keyboard.TAB);
+		var tabKey = game.input.keyboard.addKey(Phaser.Keyboard.TAB);
 		tabKey.onDown.add(loginState.switchFocus, this);
+		var enterKey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+		enterKey.onDown.add(loginState.quickSubmit, this);
 		loginBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'loginBackgroundScreen');
 		user = game.add.inputField(loadState.width / 2+150, loadState.height/2, {
 		                font: '18px Arial',
@@ -15,11 +17,11 @@ var loginState = {
 		                fillAlpha: 1,
 		                fontWeight: 'bold',
 		                width: 150,
-		                max: 20,
+		                max: 24,
 		                padding: 8,
 		                borderWidth: 1,
 		                borderColor: '#000',
-		                borderRadius: 6,
+		                borderRadius: 1,
 		                placeHolder: 'Username',
 		                textAlign: 'center',
 		                zoom: true
@@ -34,7 +36,7 @@ var loginState = {
 		                padding: 8,
 		                borderWidth: 1,
 		                borderColor: '#000',
-		                borderRadius: 6,
+		                borderRadius: 1,
 		                placeHolder: 'Password',
 		                type: Fabrique.InputType.password,
 		                zoom: true
@@ -43,7 +45,7 @@ var loginState = {
 		submitButton = game.add.button(loadState.width/2+150, loadState.height/2 + 150, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
 	},
 	goToMenuScreen: function(){
-		game.state.start('menu');
+		loginState.catchError();
 	},
 	switchFocus: function(){
 		if(user.focus === true && password.focus === false){
@@ -55,5 +57,32 @@ var loginState = {
 			password.endFocus();
 			user.startFocus();
 		}
-	}
+	},
+	quickSubmit: function(){
+		if(password.focus === true){
+			loginState.catchError();
+		}
+	},
+	catchError: function(){
+		if(user.value == ''){
+			user.endFocus();
+			password.endFocus();
+			user.startFocus();
+		} else if(password.value == ''){
+			user.endFocus();
+			password.endFocus();
+			password.startFocus();
+		} else {
+			data.Get('/login?id='+user.value+'&pass='+password.value, function(data){
+				if(JSON.parse(data)['logged'] == 'true'){
+					user.destroy();
+					password.destroy();
+					game.state.start('menu');
+				} else {
+					user.resetText();
+					password.resetText();
+				}
+			});
+		}
+	},
 };

@@ -13,11 +13,6 @@ The game is in a very early alpha stage.
 ## Roadmap
 This section will be updated soon!
 
-### Usage
-* node testserver.js Game/
-* mongod --dbpath=data/
-* firefox localhost:4242/html/index.html
-
 > **Note:**
 > - The entire game is being rewritten with the Phaser.io framework.
 > - Account creation will be closed until the next open alpha test.

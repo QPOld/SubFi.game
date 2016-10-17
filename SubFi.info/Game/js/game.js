@@ -10,6 +10,12 @@
 	NOTES:
 		Verison Control:
 			Each commit should have its own version id. This will allow for eaiser debug.
+			i.e.
+				0.0.1a
+			If an additional fix is needed on a commit use:
+			i.e.
+				0.0.1a-a
+			Essentially sub versions for each commit to fix a previous fix.
 		Resolution options:
 			1920x1080
 			1280x720
