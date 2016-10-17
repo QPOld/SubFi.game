@@ -30,8 +30,8 @@
 			For real the server has to change or at least proxypass to node.
 			Scale the game off of node.
 		Database:
-			The fastest database that can return at least 60 updates a second from a 
-			single user. This may not happen but the goal is speed. Possible MongoDb.
+			Exapnd upon MongoDb and Express interaction.
+			Connect it with socket.io or it will have to be get/post functions.
 	Issues:
 		--> Create change resolution option in the settingsState
 		--> Redo all art in new resolution mode.

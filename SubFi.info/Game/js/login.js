@@ -75,8 +75,6 @@ var loginState = {
 		} else {
 			data.Get('/login?id='+user.value+'&pass='+password.value, function(data){
 				if(JSON.parse(data)['logged'] == 'true'){
-					user.destroy();
-					password.destroy();
 					game.state.start('menu');
 				} else {
 					user.resetText();
