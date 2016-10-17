@@ -14,7 +14,7 @@ var loginState = {
 		                fill: '#212121',
 		                fillAlpha: 1,
 		                fontWeight: 'bold',
-		                width: 158,
+		                width: 258,
 						height: 25,
 		                max: 24,
 		                padding: 8,
@@ -31,7 +31,7 @@ var loginState = {
 		                fill: '#212121',
 		                fillAlpha: 1,
 		                fontWeight: 'bold',
-		                width: 158,
+		                width: 258,
 						height: 25,
 		                padding: 8,
 		                borderWidth: 1,
@@ -79,6 +79,7 @@ var loginState = {
 				} else {
 					user.resetText();
 					password.resetText();
+					game.debug.text('Invalid Username/Password.',300,480);
 				}
 			});
 		}

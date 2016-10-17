@@ -54,7 +54,11 @@ app.get('/register',function(req,res){
 	var user = req.query['id'];
 	var pass = req.query['pass'];
 	var collection = db.get('usercollection');
-	collection.insert({'username': user,'password':pass,'email':email});
+	collection.insert({'username': user,'password':pass,'email':email},function(err,docs){
+		if(err == null){
+			res.json({ registered: "true" });
+		}
+	});
 });
 
 

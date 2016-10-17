@@ -37,7 +37,10 @@
 		--> Redo all art in new resolution mode.
 		--> All art will become default game art.
 		--> Buttons can not be tabbed through like basic html/css buttons.
-		--> Develope CRUD for MongoDb.
+		--> Develope CRUD for MongoDB.
+		--> Combine MongoDB with a socket connections.
+	Current:
+		* Create functional Login/Register Page with MongoDB *
 
  */
 var game = new Phaser.Game(1280,720, Phaser.AUTO, 'gameDiv');
