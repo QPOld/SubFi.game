@@ -94,7 +94,8 @@ var registerState = {
 					game.debug.text('Email/Username already exists.',300,480);
 				} else {
 					console.log('/register?id='+user.value+'&pass='+password.value+'&email='+email.value)
-					// Error data.Get Not A Function <-- Something with callback hell.
+					// TypError: data.Get Not A Function <-- Something with callback hell.
+					// I think the iife doesn't exist inside the callback or the problem is more trival then that.
 					/* data.Get('/register?id='+user.value+'&pass='+password.value+'&email='+email.value, function(data){
 						if(JSON.parse(data)['registered'] == 'true'){
 							game.state.start('login');

@@ -1,3 +1,13 @@
+/* 
+	loginState
+	
+	The entire login state is created in this file. This includes buttons, input fields, background images, etc..
+	Helper functions used on this pages that are not get and post functions are contained in the file.
+	Get and Post are from the data.js file. Data.js is an IIFE that only has a Get and Post function.
+	
+	Notes:
+		CSS style for phaser-input inputFields may need to be in their own CSS file.
+ */
 var loginState = {
 	
 	create: function(){

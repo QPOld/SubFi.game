@@ -7,7 +7,12 @@
 	i.e. the first screen to show it will load it.
 	
 	Notes:
-		add in generic background for every state.
+		Add in generic background for every state.
+		Each state has its own function to load images.
+		This may change if all states are combined into a single sprite sheet.
+		Each state much be preloaded before use.
+	Issues:
+		the init function may need some additional work to fix all full screen issues.
  */
 var loadState = {
 	preload: function(){
