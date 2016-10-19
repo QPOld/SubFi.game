@@ -1,25 +1,41 @@
-/* 
-	loginState
-	
-	The entire login state is created in this file. This includes buttons, input fields, background images, etc..
-	Helper functions used on this pages that are not get and post functions are contained in the file.
-	Get and Post are from the data.js file. Data.js is an IIFE that only has a Get and Post function.
-	
-	Notes:
-		CSS style for phaser-input inputFields may need to be in their own CSS file.
+/**
+ *	@description The entire login state is created in this file. This includes
+ *		buttons, input fields, background images, etc. The helper functions used
+ *		on this pages are in data.js.
+ *	@author Michael Parkinson <SubFiApp@gmail.com>
+ *
+ *	@todo Create standard html/css input for the login page instead of Phaser-input.
+ */
+/**
+ * @namespace loginState
  */
 var loginState = {
-	
+	/**
+	 *	@description Reserved name in Phaser.
+	 *	@memberOf loginState
+	 *	@function create
+	 */
 	create: function(){
-		
+		/**
+		 *	@description Create the login form for the login state.
+		 *	@function loginState.loginForm
+		 */
 		loginState.loginForm();
-		console.log('loginState Complete.');
+		console.log('loginState Complete.'); // Remove upon release.
 	},
+	/**
+	 *	@description Main function for the login form. This will hold each game element 
+	 *		on the login form.
+	 *	@memberOf loginState
+	 *	@function loginForm
+	 *
+	 *	@todo Redo this function in pure html/css.
+	 */
 	loginForm: function(){
 		var tabKey = game.input.keyboard.addKey(Phaser.Keyboard.TAB);
 		tabKey.onDown.add(loginState.switchFocus, this);
-		var loginBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'loginBackgroundScreen');
-		user = game.add.inputField(loadState.width / 2+150, loadState.height/2, {
+		var loginBackgroundScreen = game.add.tileSprite(0, 0, bootState.width, bootState.height, 'loginBackgroundScreen');
+		var user = game.add.inputField(bootState.width / 2+150, bootState.height/2, {
 		                font: '18px Arial',
 		                fill: '#212121',
 		                fillAlpha: 1,
@@ -36,7 +52,7 @@ var loginState = {
 		                zoom: true
 		            });
 		            user.blockInput = false;
-		password = game.add.inputField(loadState.width/2+150, loadState.height/2 + 100, {
+		var password = game.add.inputField(bootState.width/2+150, bootState.height/2 + 100, {
 		                font: '18px Arial',
 		                fill: '#212121',
 		                fillAlpha: 1,
@@ -53,9 +69,16 @@ var loginState = {
 		                zoom: true
 		            });
 					password.blockInput = false;
-		var submitButton = game.add.button(loadState.width/2+150, loadState.height/2 + 175, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
-		var registerButton = game.add.button(loadState.width/2+250, loadState.height/2 + 175, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
+		var submitButton = game.add.button(bootState.width/2+150, bootState.height/2 + 175, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
+		var registerButton = game.add.button(bootState.width/2+250, bootState.height/2 + 175, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 	},
+	/**
+	 *	@description This function is called when the submit button is down clicked.
+	 *		It calls the error handler then proceeds to start the main screen if succesful.
+	 *	@memberOf loginState
+	 *	@function goToMenuScreen
+	 */
+	//////// LEFT OFF HERE ////////
 	goToMenuScreen: function(){
 		loginState.catchError();
 	},

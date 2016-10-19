@@ -51,9 +51,6 @@ var loadState = {
 		game.state.start('login');
 		console.log('loadState Complete.'); // Remove upon release.
 	},
-	/** Width is defined with the bootstate namespace {@see bootState}. */
-	width:bootState.width,
-	height:bootState.height,
 	/**
 	 *	@description Initialization function for the entire game. All default client 
 	 *		side game options will be initiated within this function.
@@ -61,31 +58,73 @@ var loadState = {
 	 *	@function init
 	 */
 	init: function() {
-		/** Restricts right clicking on the screen.*/
+		/**	Restricts right clicking on the screen.*/
 		game.canvas.oncontextmenu = function () {return false};
-		//////// LEFT OFF HERE ////////
+		/**	A scale mode that shows the entire game while maintaining proportions. */
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		game.scale.minWidth = loadState.width;
-		game.scale.minHeight = loadState.height;
-		game.scale.maxWidth = loadState.width;
-		game.scale.maxHeight = loadState.height;
+		/** Forces the minimum width of the game screen to be the predefined default width. {@link bootState#width} */
+		game.scale.minWidth = bootState.width;
+		/** Forces the minimum height of the game screen to be the predefined default height. {@link bootState#height} */
+		game.scale.minHeight = bootState.height;
+		/** Forces the maximum width of the game screen to be the predefined default width. {@link bootState#width} */
+		game.scale.maxWidth = bootState.width;
+		/** Forces the maximum height of the game screen to be the predefined default height. {@link bootState#height} */
+		game.scale.maxHeight = bootState.height;
+		/** Aligns the page horizontally to the center of the screen. */
 		game.scale.pageAlignHorizontally = true;
+		/** Aligns the page vertically to the center of the screen. */
 		game.scale.pageAlignVertically = true;
+		/** 
+		 *	@param {number} innerWidth Defines the canvas width.
+		 */
 		game.canvas.style.width = window.innerWidth+"px";
+		/** 
+		 *	@description The -1 comes from a clipping issue on most browers where a single pixel
+		 *		line is missing from the height. This is a hacky solution to a strange problem
+		 *		brought up on the Phaser development forums.
+		 *	@param {number} innerHeight Defines the canvas height.
+		 */
 		game.canvas.style.height= window.innerHeight-1+"px";
+		/** Resets all internal variables.*/
 		game.scale.refresh();
 	},
+	/**
+	 *	@description Adds text and images to the screen while the game is loading assets. Right now the game
+	 *		loads quickly essentially making the loading screen non existent. As the game grows in complexity
+	 *		this screen will become very useful.
+	 *	@memberOf loadState
+	 *	@function loadingScreen
+	 *	@todo Create an awesome animation for the loading screen.
+	 */
 	loadingScreen: function(){
-		var loadingLabel = game.add.text(loadState.width/2,loadState.height/2,'Loading...',{font:'30px Courier'})
+		var loadingLabel = game.add.text(bootState.width/2,bootState.height/2,'Loading...',{font:'30px Courier'})
 	},
+	/**
+	 *	@description Loads the background image for the login screen. The input forms for the 
+	 *		loginscreen may be reworked to be pure html and styled in css. This will remove the 
+	 *		need for button assets for the login form only. Other in game buttons will remain
+	 *		as assets to the game.
+	 *	@memberOf loadState
+	 *	@function loginScreen
+	 */
 	loginScreen: function(){
 		game.load.image('loginBackgroundScreen','../assets/loginBackgroundScreen.png');
 		game.load.image('submitButton', '../assets/submitButton.png')
 		game.load.image('registerButton', '../assets/registerButton.png')
 	},
+	/**
+	 *	@memberOf loadState
+	 *	@function registerScreen
+	 */
 	registerScreen: function(){
 		game.load.image('registerBackgroundScreen','../assets/registerBackgroundScreen.png');
 	},
+	/**
+	 *	@description The main game screen. The entire game will run off of users interacting
+	 *		with the main screen. All buttons will be assets and not html/css.
+	 *	@memberOf loadState
+	 *	@function mainScreen
+	 */
 	mainScreen: function() {
 		game.load.image('mainBackgroundScreen', '../assets/mainBackgroundScreen.png');
 		game.load.image('fullScreenButton', '../assets/fullScreenButton.png');
@@ -97,12 +136,32 @@ var loadState = {
 		game.load.image('rankButton', '../assets/rankButton.png');
 		game.load.image('characterButton', '../assets/characterButton.png')
 	},
+	/**
+	 *	@memberOf loadState
+	 *	@function settingsScreen
+	 */
 	settingsScreen: function(){
 		game.load.image('settingsBackgroundScreen', '../assets/settingsBackgroundScreen.png');
 		game.load.image('backButton', '../assets/backButton.png');
 	},
+	/**
+	 *	@memberOf loadState
+	 *	@function chatScreen
+	 */
 	chatScreen: function(){},
+	/**
+	 *	@memberOf loadState
+	 *	@function skillScreen
+	 */
 	skillScreen: function(){},
+	/**
+	 *	@memberOf loadState
+	 *	@function inventoryScreen
+	 */
 	inventoryScreen: function(){},
+	/**
+	 *	@memberOf loadState
+	 *	@function matchScreen
+	 */
 	matchScreen: function(){},
-}
+} // End of loadState
