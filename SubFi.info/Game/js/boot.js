@@ -1,25 +1,45 @@
-/* 
-	bootState
-	
-	Boot is before preload. Any file or phaser functions that must be attached before 
-	preload will be in this file.
-	
-	Notes:
-		No physics will be added.
-		Plugins will go in the boot file.
-		Width and height are defined here for the rest of the game except in the game.js file.
-	
-	Issues:
-		Allow width & height to be in the game.js file and referenced to other files.
+/**
+ *	
+ *	@description Any file or phaser function that must be attached before 
+ *		the aseets are loaded will be in this file. As of right now the width and height are defined here.
+ *
+ *	@author Michael Parkinson <SubFiApp@gmail.com>
+ *
+ *	@todo Put width and height into the game.js file.
+ */
+/**
+ *	@namespace bootState
  */
 var bootState = {
-	// Default create function. At this point it just starts the new state called load.
+	/**
+	 *	@description Reserved name in Phaser.
+	 *	@memberOf bootState
+	 *	@function create
+	 */
 	create: function() {
+		/**
+		 *	@function game.add.plugin
+	     *	@param {function} Fabrique.Plugins.InputField Plugin for phaser that create html like input fields.
+		 *	@function game.state.start
+		 */
 		game.add.plugin(Fabrique.Plugins.InputField);
+		/** load is defined in game.js */
 		game.state.start('load');
-		console.log('bootState Complete.');//Remove on release.
+		console.log('bootState Complete.'); // Remove upon release.
 	},
+	/**
+	 *	@description Default screen width for the client.
+	 *	@memberOf bootState
+	 *	@param {number} width The default screen width.
+	 *	
+	 */
 	width:1280,
+	/**
+	 *	@description Default screen height for the client.
+	 *	@memberOf bootState
+	 *	@param {number} height The default screen height.
+	 *	
+	 */
 	height:720,
 	
 };

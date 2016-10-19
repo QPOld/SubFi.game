@@ -1,21 +1,36 @@
-/* 
-	loadState
-	
-	Anything that is loaded into the memory cache for the game will be in this file.
-	Every screen has its own function to load the necessary assets.
-	Assets will be reused but are loaded within the first time screen.
-	i.e. the first screen to show it will load it.
-	
-	Notes:
-		Add in generic background for every state.
-		Each state has its own function to load images.
-		This may change if all states are combined into a single sprite sheet.
-		Each state much be preloaded before use.
-	Issues:
-		the init function may need some additional work to fix all full screen issues.
+/**
+ *	@description Anything that is loaded into the memory cache for the game will be in this file.
+ *		Every screen has its own function to load the necessary assets.
+ *		Assets will be reused but are loaded within the first time screen.
+ *		i.e. the first screen to show it will load it.
+ *
+ *	@author Michael Parkinson <SubFiApp@gmail.com>
+ *
+ *	@todo The init function may need some additional work to fix all full screen issues.
+ */
+/**
+ *	@namespace loadState
  */
 var loadState = {
+	/**
+	 *	@description Reserved name in Phaser.
+	 *	@memberOf loadState
+	 *	@function preload
+	 */
 	preload: function(){
+		/**
+		 *	@description All loadState functions will be called in the preload function.
+		 *	@function loadState.loadingScreen
+		 *	@function loadState.init
+		 *	@function loadState.loginScreen
+		 *	@function loadState.registerScreen
+		 *	@function loadState.mainScreen
+		 *	@function loadState.settingsScreen
+		 *	@function loadState.chatScreen
+		 *	@function loadState.skillScreen
+		 *	@function loadState.inventoryScreen
+		 *	@function loadState.matchScreen
+		 */
 		loadState.loadingScreen();
 		loadState.init();
 		loadState.loginScreen();
@@ -27,14 +42,28 @@ var loadState = {
 		loadState.inventoryScreen();
 		loadState.matchScreen();
 	},
+	/**
+	 *	@description Reserved name in Phaser.
+	 *	@memberOf loadState
+	 *	@function create
+	 */
 	create: function(){
 		game.state.start('login');
-		console.log('loadState Complete.');
+		console.log('loadState Complete.'); // Remove upon release.
 	},
+	/** Width is defined with the bootstate namespace {@see bootState}. */
 	width:bootState.width,
 	height:bootState.height,
+	/**
+	 *	@description Initialization function for the entire game. All default client 
+	 *		side game options will be initiated within this function.
+	 *	@memberOf loadState
+	 *	@function init
+	 */
 	init: function() {
-		game.canvas.oncontextmenu = function () {return false}
+		/** Restricts right clicking on the screen.*/
+		game.canvas.oncontextmenu = function () {return false};
+		//////// LEFT OFF HERE ////////
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		game.scale.minWidth = loadState.width;
 		game.scale.minHeight = loadState.height;
