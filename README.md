@@ -40,6 +40,8 @@ This section will be updated soon!
 
 > - Firefox support only at the moment.
 
+### Change Log
+- 0.0.1b-f Updating Code Documentation and additional login fixes.
 
 Credits
 -------
