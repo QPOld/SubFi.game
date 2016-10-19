@@ -10,38 +10,19 @@ The character skill set is very aligned with the complexity of the Path of Exile
 
 The game is written in a MEPNS (MongoDB, Express, Phaser.io, Node.js, Socket.io) stack. The old framework is being rewritten in the Phaser.io framework. As of right now the game will be hosted at [SubFi.info](https://www.subfi.info/). The server will eventually be migrated to a 3rd party hosting company upon final release.
 
-.
-
-..
-
-...
-
-....
-
-.....
-
-....
-
-...
-
-..
-
-.
-
-
 ## Roadmap
 This section will be updated soon!
 
-> **Note:**
+### Change Log
+- 0.0.1b-f Updating Code Documentation and additional login fixes.
+
+> **Notes:**
 
 > - Account creation will be closed until the next open alpha test.
 
 > - Placeholder images will be used until beta.
 
 > - Firefox support only at the moment.
-
-### Change Log
-- 0.0.1b-f Updating Code Documentation and additional login fixes.
 
 Credits
 -------
