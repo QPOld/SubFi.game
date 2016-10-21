@@ -32,43 +32,20 @@ var loginState = {
 	 *	@todo Redo this function in pure html/css.
 	 */
 	loginForm: function(){
-		var tabKey = game.input.keyboard.addKey(Phaser.Keyboard.TAB);
-		tabKey.onDown.add(loginState.switchFocus, this);
 		var loginBackgroundScreen = game.add.tileSprite(0, 0, bootState.width, bootState.height, 'loginBackgroundScreen');
-		var user = game.add.inputField(bootState.width / 2+150, bootState.height/2, {
-		                font: '18px Arial',
-		                fill: '#212121',
-		                fillAlpha: 1,
-		                fontWeight: 'bold',
-		                width: 258,
-						height: 25,
-		                max: 24,
-		                padding: 8,
-		                borderWidth: 1,
-		                borderColor: '#000',
-		                borderRadius: 1,
-		                placeHolder: 'Username',
-		                textAlign: 'center',
-		                zoom: true
-		            });
-		            user.blockInput = false;
-		var password = game.add.inputField(bootState.width/2+150, bootState.height/2 + 100, {
-		                font: '18px Arial',
-		                fill: '#212121',
-		                fillAlpha: 1,
-		                fontWeight: 'bold',
-		                width: 258,
-						height: 25,
-		                padding: 8,
-		                borderWidth: 1,
-		                borderColor: '#000',
-		                borderRadius: 1,
-		                placeHolder: 'Password',
-						textAlign: 'center',
-		                type: Fabrique.InputType.password,
-		                zoom: true
-		            });
-					password.blockInput = false;
+		cloth.append('gameDiv', 'div', attrs={
+			'id' : 'inputFieldDiv'
+		});
+		cloth.append('inputFieldDiv', 'input', attrs = {
+			'id' : 'usernameInputField',
+			'type' : 'text',
+			'placeholder' : 'Username',
+		});
+		cloth.append('inputFieldDiv', 'input', attrs = {
+			'id' : 'passwordInputField',
+			'type' : 'password',
+			'placeholder' : 'Password',
+		});
 		var submitButton = game.add.button(bootState.width/2+150, bootState.height/2 + 175, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
 		var registerButton = game.add.button(bootState.width/2+250, bootState.height/2 + 175, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 	},
@@ -84,17 +61,6 @@ var loginState = {
 	},
 	goToRegisterScreen: function(){
 		game.state.start('register');
-	},
-	switchFocus: function(){
-		if(user.focus === true && password.focus === false){
-			user.endFocus();
-			password.endFocus();
-			password.startFocus();
-		} else {
-			user.endFocus();
-			password.endFocus();
-			user.startFocus();
-		}
 	},
 	catchError: function(){
 		if(user.value == ''){

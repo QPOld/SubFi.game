@@ -1,0 +1,16 @@
+#gameDiv{
+	position:absolute
+}
+#inputFieldDiv{
+	position:relative;
+	width:200px;
+	height:400px;
+}
+#usernameInputField{
+	position:relative;
+	margin: 0 auto;
+}
+#passwordInputField{
+	position:relative;
+	margin:  0 auto;
+}
