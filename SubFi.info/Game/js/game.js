@@ -1,11 +1,9 @@
 /**
- *	
  *	@description Within the index.html file there is a div with id gameDiv. 
  *		This file attaches a new Phaser.game object to that div. 
  *		Each game screen is a unique game state. 
  *		Each screen is determined by the js file attached to it. 
  *		The game starts with boot.
- *
  *	@author Michael Parkinson <SubFiApp@gmail.com>
  */
  
@@ -17,6 +15,8 @@
  *	@param {number} Phaser.AUTO This will auto-detect which renderer to use inside a browser.
  *	@param {string} gameDiv The Phaser.Game attaches itself to a div.
  *	@param {object} game The core object for any Phaser game.
+ *	@constant {number} width
+ *	@constant {number} height
  */
 var width = 1280, height = 720,div = 'gameDiv', game = new Phaser.Game(width,height, Phaser.AUTO, div);
 /** 
@@ -26,7 +26,6 @@ var width = 1280, height = 720,div = 'gameDiv', game = new Phaser.Game(width,hei
  *		phaser api for revealing a new state from a previous state. Each state is just a 
  *		namespace containg more standard phaser api. The name infront of the word State in
  *		each namespace is the actual name of the namespace when it is referenced with Phaser.
- *
  *	@namespace bootState
  *	@namespace loadState
  *	@namespace loginState
@@ -35,7 +34,6 @@ var width = 1280, height = 720,div = 'gameDiv', game = new Phaser.Game(width,hei
  *	@namespace settingsStat
  *	@function game.state.add
  *	@function game.state.start
- *
  */
 game.state.add('boot',bootState);
 game.state.add('load',loadState);

@@ -1,9 +1,6 @@
 /**
- *	@description The entire login state is created in this file. This includes
- *		buttons, input fields, background images, etc. The helper functions used
- *		on this pages are in data.js.
+ *	@description The user login page.
  *	@author Michael Parkinson <SubFiApp@gmail.com>
- *
  */
 /**
  * @namespace loginState
@@ -27,7 +24,6 @@ var loginState = {
 	 *		on the login form.
 	 *	@memberof loginState
 	 *	@function loginForm
-	 *
 	 */
 	loginForm: function(){
 		var loginBackgroundScreen = game.add.tileSprite(0, 0, bootState.width, bootState.height, 'loginBackgroundScreen');
@@ -77,12 +73,14 @@ var loginState = {
 	 *	@function goToRegisterScreen
 	 */
 	goToRegisterScreen: function(){
+		/**	@see register.js*/
 		game.state.start('register');
 	},
 	/**
 	 *	@description The login error handler. It makes sure that each input field is
 	 *		is filled with correct infomation. It calls the data.Get function
 	 *	@see data.js
+	 *	@see cloth.js
 	 *	@memberof loginState
 	 *	@function catchError
 	 *	@todo Seperate the error handle from game.state.start call.
@@ -95,11 +93,21 @@ var loginState = {
 		} else {
 			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
 				if(JSON.parse(data)['logged'] == 'true'){
+					/**	@see menu.js*/
 					game.state.start('menu');
 				} else {
 					game.debug.text('Invalid Username/Password.',300,480);
 				}
 			});
 		}
+	},
+	/**
+	 *	@description This function removes all the html elements.
+	 *	@memberof loginState
+	 *	@function removeAll
+	 *	@todo Expand this function.
+	 */
+	removeAll: function(){
+		cloth.remove('inputFieldDiv');
 	},
 };

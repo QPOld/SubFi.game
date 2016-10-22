@@ -25,6 +25,7 @@
 	 *		Loops through all the keys in the attrs object 
 	 *		and uses the method element.setAttribute.
 	 *		Invalid keys and attributes are ignored.
+	 *	@memberof cloth
 	 *	@function setAttributes
 	 *	@param {element} element The html element that is being created.
 	 *	@param {object} attrs The attribute object. This contains any 

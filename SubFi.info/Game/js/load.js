@@ -3,9 +3,7 @@
  *		Every screen has its own function to load the necessary assets.
  *		Assets will be reused but are loaded within the first time screen.
  *		i.e. the first screen to show it will load it.
- *
  *	@author Michael Parkinson <SubFiApp@gmail.com>
- *
  *	@todo The init function may need some additional work to fix all full screen issues.
  */
 /**
@@ -14,7 +12,7 @@
 var loadState = {
 	/**
 	 *	@description Reserved name in Phaser.
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function preload
 	 */
 	preload: function(){
@@ -48,6 +46,7 @@ var loadState = {
 	 *	@function create
 	 */
 	create: function(){
+		/**	@see boot.js */
 		game.state.start('login');
 		console.log('loadState Complete.'); // Remove upon release.
 	},

@@ -1,114 +1,115 @@
+/**
+ *	@description The user register page.
+ *	@author Michael Parkinson <SubFiApp@gmail.com
+ */
+/**
+ * @namespace registerState
+ */
 var registerState = {
+	/**
+	 *	@description Reserved name in Phaser.
+	 *	@memberof registerState
+	 *	@function create
+	 */
 	create: function(){
-		
 		registerState.registerForm();
-		console.log('registerState Complete.');
+		console.log('registerState Complete.'); // Remove upon final release.
 	},
+	/**
+	 *	@description Main function for the register screen. Allows the user to input their 
+	 *		email address, username, and password for the account.
+	 *	@memberof registerState
+	 *	@function registerForm
+	 *
+	 */
 	registerForm: function(){
-		var tabKey = game.input.keyboard.addKey(Phaser.Keyboard.TAB);
-		tabKey.onDown.add(loginState.switchFocus, this);
 		var registerBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'registerBackgroundScreen');
-		email = game.add.inputField(loadState.width/2+150,loadState.height/2-100,{
-					 font: '18px Arial',
-		                fill: '#212121',
-		                fillAlpha: 1,
-		                fontWeight: 'bold',
-		                width: 258,
-						height: 25,
-		                max: 54,
-		                padding: 8,
-		                borderWidth: 1,
-		                borderColor: '#000',
-		                borderRadius: 1,
-		                placeHolder: 'Email',
-		                textAlign: 'center',
-		                zoom: true
-				});
-				email.blockInput = false;
-		user = game.add.inputField(loadState.width / 2+150, loadState.height/2, {
-		                font: '18px Arial',
-		                fill: '#212121',
-		                fillAlpha: 1,
-		                fontWeight: 'bold',
-		                width: 258,
-						height: 25,
-		                max: 24,
-		                padding: 8,
-		                borderWidth: 1,
-		                borderColor: '#000',
-		                borderRadius: 1,
-		                placeHolder: 'Username',
-		                textAlign: 'center',
-		                zoom: true
-		            });
-		            user.blockInput = false;
-		password = game.add.inputField(loadState.width/2+150, loadState.height/2 + 100, {
-		                font: '18px Arial',
-		                fill: '#212121',
-		                fillAlpha: 1,
-		                fontWeight: 'bold',
-		                width: 258,
-						height: 25,
-		                padding: 8,
-		                borderWidth: 1,
-		                borderColor: '#000',
-		                borderRadius: 1,
-		                placeHolder: 'Password',
-						textAlign: 'center',
-		                type: Fabrique.InputType.password,
-		                zoom: true
-					});
-					password.blockInput = false;
-		
-		var submitButton = game.add.button(loadState.width/2+150, loadState.height/2 + 175, 'submitButton', registerState.goToMenuScreen, this, 2, 1, 0);
-		var backButton = game.add.button( 15, 15, 'backButton',registerState.goToLoginScreen, this, 2 , 1, 0);
+		/**
+		 *	@description Cloth is a simple html element generator.
+		 *	@see cloth.js
+		 */
+		cloth.append('gameDiv', 'div', attrs={
+			'id' : 'inputFieldDiv'
+		});
+		cloth.append('inputFieldDiv', 'input', attrs = {
+			'id' : 'emailInputField',
+			'type' : 'text',
+			'placeholder' : 'Email',
+		});
+		cloth.append('inputFieldDiv', 'input', attrs = {
+			'id' : 'usernameInputField',
+			'type' : 'text',
+			'placeholder' : 'Username',
+		});
+		cloth.append('inputFieldDiv', 'input', attrs = {
+			'id' : 'passwordInputField',
+			'type' : 'password',
+			'placeholder' : 'Password',
+		});
+		cloth.append('inputFieldDiv', 'input', attrs = {
+			'id' : 'passwordInputFieldCopy',
+			'type' : 'password',
+			'placeholder' : 'Password',
+		});
+		cloth.append('inputFieldDiv', 'input', attrs={
+			'id' : 'inputFieldSubmitButton',
+			'type' : 'submit',
+			'value' : 'Login',
+			'onclick' : loginState.goToMenuScreen(),
+		});
+		cloth.append('inputFieldDiv', 'input', attrs={
+			'id' : 'backSubmitButton',
+			'type' : 'submit',
+			'value' : 'back',
+			'onclick' : loginState.goToLoginScreen(),
+		});
 	},
+	/**
+	 *	@description When a user creates an account instead of just going back to 
+	 *		the login page it will log you into the game.
+	 *	@memberof registerState
+	 *	@function goToMenuScreen
+	 */
 	goToMenuScreen: function(){
 		registerState.catchError();
 	},
+	/**
+	 *	@description In case a user hits the register button there is a back button. 
+	 *		If a user does hit the browser back button then the game will be reloaded.
+	 *	@memberof goToLoginScreen
+	 *	@function goToLoginScreen
+	 */
 	goToLoginScreen: function(){
+		/**	@see login.js */
 		game.state.start('login');
 	},
+	/**
+	 *	@description The login error handler. It makes sure that each input field is
+	 *		is filled with correct infomation. It calls the data.Get function
+	 *	@see data.js
+	 *	@see cloth.js
+	 *	@memberof registerState
+	 *	@function catchError
+	 *	@todo Seperate the error handle from game.state.start call.
+	 */
 	catchError: function(){
-		if(user.value == ''){
-			user.endFocus();
-			password.endFocus();
-			email.endFocus();
-			user.startFocus();
-		} else if(password.value == ''){
-			user.endFocus();
-			password.endFocus();
-			email.endFocus();
-			password.startFocus();
-		} else if(email.value == ''){
-			user.endFocus();
-			password.endFocus();
-			email.endFocus();
-			email.startFocus();
-		}else {
-			data.Get('/login?id='+user.value+'&pass='+password.value, function(data){
+		if(cloth.retrieve('usernameInputField') == ''){
+			cloth.focus('usernameInputField');
+		}else if(cloth.retrieve('emailInputField') == ''){
+			cloth.focus('emailInputField');
+		} else if(cloth.retrieve('passwordInputField') == ''){
+			cloth.focus('passwordInputField');
+		} else if(cloth.retrieve('passwordInputFieldCopy') == ''){
+			cloth.focus('passwordInputFieldCopy');
+		} else {
+			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
 				if(JSON.parse(data)['logged'] == 'true'){
-					user.resetText();
-					password.resetText();
-					email.resetText();
-					game.debug.text('Email/Username already exists.',300,480);
+					/**	@see menu.js*/
+					game.state.start('menu');
 				} else {
-					console.log('/register?id='+user.value+'&pass='+password.value+'&email='+email.value)
-					// TypError: data.Get Not A Function <-- Something with callback hell.
-					// I think the iife doesn't exist inside the callback or the problem is more trival then that.
-					/* data.Get('/register?id='+user.value+'&pass='+password.value+'&email='+email.value, function(data){
-						if(JSON.parse(data)['registered'] == 'true'){
-							game.state.start('login');
-						} else {
-							user.resetText();
-							password.resetText();
-							email.resetText();
-						}
-					}); */
+					game.debug.text('Invalid Username/Password.',300,480);
 				}
 			});
-			
-			
 		}
 	},
 }

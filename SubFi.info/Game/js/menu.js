@@ -9,15 +9,15 @@ var menuState = {
 		console.log('menuState Complete.');
 	},
 	menuScreen: function () {
-			mainBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'mainBackgroundScreen');
-			fullScreenButton = game.add.button(loadState.width - 72, 28, 'fullScreenButton', menuState.goFullScreen, this, 2, 1, 0);
-			settingsButton = game.add.button(loadState.width - 144, 28, 'settingsButton',menuState.goToSettingsScreen , this, 2, 1, 0);
-			chatButton = game.add.button(loadState.width - 216, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
-			skillButton = game.add.button(loadState.width - 288, 28, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
-			matchButton = game.add.button(15, 15, 'matchButton', menuState.goToMatchScreen, this, 2, 1, 0);
-			inventoryButton = game.add.button(loadState.width - 360, 28, 'inventoryButton', menuState.goToInventoryScreen, this, 2, 1, 0);
-			rankButton = game.add.button(loadState.width - 432, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
-			characterButton = game.add.button(loadState.width - 504, 28, 'characterButton', menuState.goToCharacterScreen, this, 2, 1, 0);
+			var mainBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'mainBackgroundScreen');
+			var fullScreenButton = game.add.button(loadState.width - 72, 28, 'fullScreenButton', menuState.goFullScreen, this, 2, 1, 0);
+			var settingsButton = game.add.button(loadState.width - 144, 28, 'settingsButton',menuState.goToSettingsScreen , this, 2, 1, 0);
+			var chatButton = game.add.button(loadState.width - 216, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
+			var skillButton = game.add.button(loadState.width - 288, 28, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
+			var matchButton = game.add.button(15, 15, 'matchButton', menuState.goToMatchScreen, this, 2, 1, 0);
+			var inventoryButton = game.add.button(loadState.width - 360, 28, 'inventoryButton', menuState.goToInventoryScreen, this, 2, 1, 0);
+			var rankButton = game.add.button(loadState.width - 432, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
+			var characterButton = game.add.button(loadState.width - 504, 28, 'characterButton', menuState.goToCharacterScreen, this, 2, 1, 0);
 			
 	},
 	goFullScreen: function() {
@@ -36,6 +36,7 @@ var menuState = {
 			}
 	},
 	goToSettingsScreen: function(){
+		/**	@see settings.js */
 		game.state.start('settings');
 	},
 	goToChatScreen: function(){
