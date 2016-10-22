@@ -23,46 +23,36 @@ var registerState = {
 	 *
 	 */
 	registerForm: function(){
-		var registerBackgroundScreen = game.add.tileSprite(0, 0, loadState.width, loadState.height, 'registerBackgroundScreen');
+		var registerBackgroundScreen = game.add.tileSprite(0, 0, bootState.width, bootState.height, 'registerBackgroundScreen');
 		/**
 		 *	@description Cloth is a simple html element generator.
 		 *	@see cloth.js
 		 */
-		cloth.append('gameDiv', 'div', attrs={
-			'id' : 'inputFieldDiv'
+		cloth.append(document.getElementsByTagName("canvas"), 'div', attrs={
+			'id' : 'registerFieldDiv'
 		});
-		cloth.append('inputFieldDiv', 'input', attrs = {
+		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'emailInputField',
 			'type' : 'text',
 			'placeholder' : 'Email',
 		});
-		cloth.append('inputFieldDiv', 'input', attrs = {
+		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'usernameInputField',
 			'type' : 'text',
 			'placeholder' : 'Username',
 		});
-		cloth.append('inputFieldDiv', 'input', attrs = {
+		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'passwordInputField',
 			'type' : 'password',
 			'placeholder' : 'Password',
 		});
-		cloth.append('inputFieldDiv', 'input', attrs = {
+		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'passwordInputFieldCopy',
 			'type' : 'password',
-			'placeholder' : 'Password',
+			'placeholder' : 'Password Again',
 		});
-		cloth.append('inputFieldDiv', 'input', attrs={
-			'id' : 'inputFieldSubmitButton',
-			'type' : 'submit',
-			'value' : 'Login',
-			'onclick' : loginState.goToMenuScreen(),
-		});
-		cloth.append('inputFieldDiv', 'input', attrs={
-			'id' : 'backSubmitButton',
-			'type' : 'submit',
-			'value' : 'back',
-			'onclick' : loginState.goToLoginScreen(),
-		});
+		var submitButton = game.add.button(15, 225, 'submitButton', registerState.goToMenuScreen, this, 2, 1, 0);
+		var backButton = game.add.button(105, 225, 'backButton', registerState.goToLoginScreen, this, 2, 1, 0);
 	},
 	/**
 	 *	@description When a user creates an account instead of just going back to 
@@ -80,6 +70,7 @@ var registerState = {
 	 *	@function goToLoginScreen
 	 */
 	goToLoginScreen: function(){
+		registerState.removeAll();
 		/**	@see login.js */
 		game.state.start('login');
 	},
@@ -93,17 +84,21 @@ var registerState = {
 	 *	@todo Seperate the error handle from game.state.start call.
 	 */
 	catchError: function(){
-		if(cloth.retrieve('usernameInputField') == ''){
-			cloth.focus('usernameInputField');
-		}else if(cloth.retrieve('emailInputField') == ''){
+		if(cloth.retrieve('emailInputField') == ''){
 			cloth.focus('emailInputField');
+		} else if(cloth.retrieve('usernameInputField') == ''){
+			cloth.focus('usernameInputField');
 		} else if(cloth.retrieve('passwordInputField') == ''){
 			cloth.focus('passwordInputField');
 		} else if(cloth.retrieve('passwordInputFieldCopy') == ''){
 			cloth.focus('passwordInputFieldCopy');
 		} else {
+			registerState.removeAll();
+			/**	@see menu.js*/
+			game.state.start('menu');
 			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
 				if(JSON.parse(data)['logged'] == 'true'){
+					registerState.removeAll();
 					/**	@see menu.js*/
 					game.state.start('menu');
 				} else {
@@ -111,5 +106,14 @@ var registerState = {
 				}
 			});
 		}
+	},
+	/**
+	 *	@description This function removes all the html elements.
+	 *	@memberof registerState
+	 *	@function removeAll
+	 *	@todo Expand this function.
+	 */
+	removeAll: function(){
+		cloth.remove('registerFieldDiv');
 	},
 }

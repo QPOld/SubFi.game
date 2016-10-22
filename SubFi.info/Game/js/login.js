@@ -31,31 +31,21 @@ var loginState = {
 		 *	@description Cloth is a simple html element generator.
 		 *	@see cloth.js
 		 */
-		cloth.append('gameDiv', 'div', attrs={
-			'id' : 'inputFieldDiv'
+		cloth.append(document.getElementsByTagName("canvas"), 'div', attrs={
+			'id' : 'loginFieldDiv'
 		});
-		cloth.append('inputFieldDiv', 'input', attrs = {
+		cloth.append('loginFieldDiv', 'input', attrs = {
 			'id' : 'usernameInputField',
 			'type' : 'text',
 			'placeholder' : 'Username',
 		});
-		cloth.append('inputFieldDiv', 'input', attrs = {
+		cloth.append('loginFieldDiv', 'input', attrs = {
 			'id' : 'passwordInputField',
 			'type' : 'password',
 			'placeholder' : 'Password',
 		});
-		cloth.append('inputFieldDiv', 'input', attrs={
-			'id' : 'inputFieldSubmitButton',
-			'type' : 'submit',
-			'value' : 'Login',
-			'onclick' : loginState.goToMenuScreen(),
-		});
-		cloth.append('inputFieldDiv', 'input', attrs={
-			'id' : 'inputFieldRegisterButton',
-			'type' : 'submit',
-			'value' : 'Register',
-			'onclick' : loginState.goToRegisterScreen(),
-		});
+		var submitButton = game.add.button(15, 150, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
+		var registerButton = game.add.button(105, 150, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 	},
 	/**
 	 *	@description This function is called when the submit button is clicked.
@@ -73,6 +63,7 @@ var loginState = {
 	 *	@function goToRegisterScreen
 	 */
 	goToRegisterScreen: function(){
+		loginState.removeAll();
 		/**	@see register.js*/
 		game.state.start('register');
 	},
@@ -91,8 +82,11 @@ var loginState = {
 		} else if(cloth.retrieve('passwordInputField') == ''){
 			cloth.focus('passwordInputField');
 		} else {
+			loginState.removeAll();
+			game.state.start('menu');
 			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
 				if(JSON.parse(data)['logged'] == 'true'){
+					loginState.removeAll();
 					/**	@see menu.js*/
 					game.state.start('menu');
 				} else {
@@ -108,6 +102,6 @@ var loginState = {
 	 *	@todo Expand this function.
 	 */
 	removeAll: function(){
-		cloth.remove('inputFieldDiv');
+		cloth.remove('loginFieldDiv');
 	},
 };

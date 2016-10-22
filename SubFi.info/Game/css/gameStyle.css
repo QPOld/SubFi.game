@@ -1,16 +1,45 @@
 #gameDiv{
 	position:absolute
 }
-#inputFieldDiv{
+#loginFieldDiv{
 	position:relative;
-	width:200px;
-	height:400px;
+	width:165px;
+	height:74px;
+	padding-left:15px;
+	padding-top:15px;
+}
+#registerFieldDiv{
+	position:relative;
+	width:165px;
+	height:148px;
+	padding-left:15px;
+	padding-top:15px;
+}
+#emailInputField{
+	position:relative;
+	margin: 0 auto;
+	width:165px;
+	height:37px;
+	font-size:17px;
 }
 #usernameInputField{
 	position:relative;
 	margin: 0 auto;
+	width:165px;
+	height:37px;
+	font-size:17px;
 }
 #passwordInputField{
 	position:relative;
 	margin:  0 auto;
+	width:165px;
+	height:37px;
+	font-size:17px;
+}
+#passwordInputFieldCopy{
+	position:relative;
+	margin:  0 auto;
+	width:165px;
+	height:37px;
+	font-size:17px;
 }
