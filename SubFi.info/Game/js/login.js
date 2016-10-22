@@ -4,7 +4,6 @@
  *		on this pages are in data.js.
  *	@author Michael Parkinson <SubFiApp@gmail.com>
  *
- *	@todo Create standard html/css input for the login page instead of Phaser-input.
  */
 /**
  * @namespace loginState
@@ -12,7 +11,7 @@
 var loginState = {
 	/**
 	 *	@description Reserved name in Phaser.
-	 *	@memberOf loginState
+	 *	@memberof loginState
 	 *	@function create
 	 */
 	create: function(){
@@ -26,13 +25,16 @@ var loginState = {
 	/**
 	 *	@description Main function for the login form. This will hold each game element 
 	 *		on the login form.
-	 *	@memberOf loginState
+	 *	@memberof loginState
 	 *	@function loginForm
 	 *
-	 *	@todo Redo this function in pure html/css.
 	 */
 	loginForm: function(){
 		var loginBackgroundScreen = game.add.tileSprite(0, 0, bootState.width, bootState.height, 'loginBackgroundScreen');
+		/**
+		 *	@description Cloth is a simple html element generator.
+		 *	@see cloth.js
+		 */
 		cloth.append('gameDiv', 'div', attrs={
 			'id' : 'inputFieldDiv'
 		});
@@ -46,38 +48,55 @@ var loginState = {
 			'type' : 'password',
 			'placeholder' : 'Password',
 		});
-		var submitButton = game.add.button(bootState.width/2+150, bootState.height/2 + 175, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
-		var registerButton = game.add.button(bootState.width/2+250, bootState.height/2 + 175, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
+		cloth.append('inputFieldDiv', 'input', attrs={
+			'id' : 'inputFieldSubmitButton',
+			'type' : 'submit',
+			'value' : 'Login',
+			'onclick' : loginState.goToMenuScreen(),
+		});
+		cloth.append('inputFieldDiv', 'input', attrs={
+			'id' : 'inputFieldRegisterButton',
+			'type' : 'submit',
+			'value' : 'Register',
+			'onclick' : loginState.goToRegisterScreen(),
+		});
 	},
 	/**
-	 *	@description This function is called when the submit button is down clicked.
+	 *	@description This function is called when the submit button is clicked.
 	 *		It calls the error handler then proceeds to start the main screen if succesful.
-	 *	@memberOf loginState
+	 *	@memberof loginState
 	 *	@function goToMenuScreen
+		@todo Seperate the error handle and the state switch.
 	 */
-	//////// LEFT OFF HERE ////////
 	goToMenuScreen: function(){
 		loginState.catchError();
 	},
+	/**
+	 *	@description This function is called when the register button is clicked.
+	 *	@memberof loginState
+	 *	@function goToRegisterScreen
+	 */
 	goToRegisterScreen: function(){
 		game.state.start('register');
 	},
+	/**
+	 *	@description The login error handler. It makes sure that each input field is
+	 *		is filled with correct infomation. It calls the data.Get function
+	 *	@see data.js
+	 *	@memberof loginState
+	 *	@function catchError
+	 *	@todo Seperate the error handle from game.state.start call.
+	 */
 	catchError: function(){
-		if(user.value == ''){
-			user.endFocus();
-			password.endFocus();
-			user.startFocus();
-		} else if(password.value == ''){
-			user.endFocus();
-			password.endFocus();
-			password.startFocus();
+		if(cloth.retrieve('usernameInputField') == ''){
+			cloth.focus('usernameInputField');
+		} else if(cloth.retrieve('passwordInputField') == ''){
+			cloth.focus('passwordInputField');
 		} else {
-			data.Get('/login?id='+user.value+'&pass='+password.value, function(data){
+			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
 				if(JSON.parse(data)['logged'] == 'true'){
 					game.state.start('menu');
 				} else {
-					user.resetText();
-					password.resetText();
 					game.debug.text('Invalid Username/Password.',300,480);
 				}
 			});

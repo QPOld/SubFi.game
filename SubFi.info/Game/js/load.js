@@ -44,7 +44,7 @@ var loadState = {
 	},
 	/**
 	 *	@description Reserved name in Phaser.
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function create
 	 */
 	create: function(){
@@ -54,7 +54,7 @@ var loadState = {
 	/**
 	 *	@description Initialization function for the entire game. All default client 
 	 *		side game options will be initiated within this function.
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function init
 	 */
 	init: function() {
@@ -62,13 +62,13 @@ var loadState = {
 		game.canvas.oncontextmenu = function () {return false};
 		/**	A scale mode that shows the entire game while maintaining proportions. */
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-		/** Forces the minimum width of the game screen to be the predefined default width. {@link bootState#width} */
+		/** Forces the minimum width of the game screen to be the predefined default width. {@see bootState#width} */
 		game.scale.minWidth = bootState.width;
-		/** Forces the minimum height of the game screen to be the predefined default height. {@link bootState#height} */
+		/** Forces the minimum height of the game screen to be the predefined default height. {@see bootState#height} */
 		game.scale.minHeight = bootState.height;
-		/** Forces the maximum width of the game screen to be the predefined default width. {@link bootState#width} */
+		/** Forces the maximum width of the game screen to be the predefined default width. {@see bootState#width} */
 		game.scale.maxWidth = bootState.width;
-		/** Forces the maximum height of the game screen to be the predefined default height. {@link bootState#height} */
+		/** Forces the maximum height of the game screen to be the predefined default height. {@see bootState#height} */
 		game.scale.maxHeight = bootState.height;
 		/** Aligns the page horizontally to the center of the screen. */
 		game.scale.pageAlignHorizontally = true;
@@ -92,7 +92,7 @@ var loadState = {
 	 *	@description Adds text and images to the screen while the game is loading assets. Right now the game
 	 *		loads quickly essentially making the loading screen non existent. As the game grows in complexity
 	 *		this screen will become very useful.
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function loadingScreen
 	 *	@todo Create an awesome animation for the loading screen.
 	 */
@@ -104,7 +104,7 @@ var loadState = {
 	 *		loginscreen may be reworked to be pure html and styled in css. This will remove the 
 	 *		need for button assets for the login form only. Other in game buttons will remain
 	 *		as assets to the game.
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function loginScreen
 	 */
 	loginScreen: function(){
@@ -113,7 +113,7 @@ var loadState = {
 		game.load.image('registerButton', '../assets/registerButton.png')
 	},
 	/**
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function registerScreen
 	 */
 	registerScreen: function(){
@@ -122,7 +122,7 @@ var loadState = {
 	/**
 	 *	@description The main game screen. The entire game will run off of users interacting
 	 *		with the main screen. All buttons will be assets and not html/css.
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function mainScreen
 	 */
 	mainScreen: function() {
@@ -137,7 +137,7 @@ var loadState = {
 		game.load.image('characterButton', '../assets/characterButton.png')
 	},
 	/**
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function settingsScreen
 	 */
 	settingsScreen: function(){
@@ -145,22 +145,22 @@ var loadState = {
 		game.load.image('backButton', '../assets/backButton.png');
 	},
 	/**
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function chatScreen
 	 */
 	chatScreen: function(){},
 	/**
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function skillScreen
 	 */
 	skillScreen: function(){},
 	/**
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function inventoryScreen
 	 */
 	inventoryScreen: function(){},
 	/**
-	 *	@memberOf loadState
+	 *	@memberof loadState
 	 *	@function matchScreen
 	 */
 	matchScreen: function(){},

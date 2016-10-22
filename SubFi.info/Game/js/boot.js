@@ -13,7 +13,7 @@
 var bootState = {
 	/**
 	 *	@description Reserved name in Phaser.
-	 *	@memberOf bootState
+	 *	@memberof bootState
 	 *	@function create
 	 */
 	create: function() {
@@ -23,23 +23,23 @@ var bootState = {
 		 *	@function game.state.start
 		 */
 		game.add.plugin(Fabrique.Plugins.InputField);
-		/** load is defined in game.js */
+		/** @see game.js */
 		game.state.start('load');
 		console.log('bootState Complete.'); // Remove upon release.
 	},
 	/**
 	 *	@description Default screen width for the client.
-	 *	@memberOf bootState
+	 *	@memberof bootState
 	 *	@param {number} width The default screen width.
 	 *	
 	 */
 	width:1280,
 	/**
 	 *	@description Default screen height for the client.
-	 *	@memberOf bootState
+	 *	@memberof bootState
 	 *	@param {number} height The default screen height.
 	 *	
 	 */
 	height:720,
 	
-};
+}; //End of bootState.
