@@ -134,6 +134,8 @@ var loadState = {
 		game.load.image('inventoryButton', '../assets/inventoryButton.png');
 		game.load.image('rankButton', '../assets/rankButton.png');
 		game.load.image('characterButton', '../assets/characterButton.png')
+		game.load.image('tradeButton', '../assets/tradeButton.png')
+		game.load.image('craftButton', '../assets/craftButton.png')
 	},
 	/**
 	 *	@memberof loadState
