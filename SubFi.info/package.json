@@ -2,11 +2,12 @@
   "name": "SubFi.info",
   "description": "SubFi Game ",
   "author": "Michael Parkinson",
-  "dependencies": {
-    "express": "*",
-    "mongodb": "*",
-    "socket.io": "*",
-	"phaser-input": "*",
-	"monk": "*"
+  "dependencies" : {
+    "express" : "*",
+    "mongodb" : "*",
+    "socket.io" : "*",
+	"phaser-input" : "*",
+	"monk" : "*",
+	"body-parser" : "*"
   }
 }

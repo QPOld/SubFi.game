@@ -1,6 +1,44 @@
 #gameDiv{
 	position:absolute
 }
+#chatFieldDiv{
+	position:relative;
+	top:567px;
+	left:5px;
+	width:300px;
+	height:120px;
+}
+#globalChatField{
+	width:300px;
+	height:120px;
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0;
+	background-color:#F4646;
+}
+ul {
+	overflow-x: hidden;
+	overflow-y:scroll;
+
+}
+ul li {
+    word-break: break-all;
+}
+#globalChatField li { 
+	padding: 5px 10px;
+	background: #FFFCFC;
+	list-style-position: outside; 
+}
+#globalChatField li:nth-child(odd) {
+	background: #CFCACA;
+	list-style-position: outside; 
+}
+#textInputField{
+	position:relative;
+	width:244px;
+	height:22px;
+	margin: 0 auto;
+}
 #loginFieldDiv{
 	position:relative;
 	width:165px;

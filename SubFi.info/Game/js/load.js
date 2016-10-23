@@ -147,7 +147,9 @@ var loadState = {
 	 *	@memberof loadState
 	 *	@function chatScreen
 	 */
-	chatScreen: function(){},
+	chatScreen: function(){
+		game.load.image('sendButton', '../assets/sendButton.png')
+	},
 	/**
 	 *	@memberof loadState
 	 *	@function skillScreen

@@ -30,5 +30,12 @@ var bootState = {
 	 *	@constant {number} height
 	 */
 	height:720,
+	/**
+	 *	@description Stores the name of the connected user. This allows the user's name to be a global variable
+	 *		such that it can be referenced for server api. Nothing else about the user will be stored globally.
+	 *	@memberof bootState
+	 *	@constant {object} user	
+	 */
+	 user:{},
 	
 }; //End of bootState.

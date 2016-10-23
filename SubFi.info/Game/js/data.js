@@ -47,7 +47,7 @@
 	 *	@param {string} The url to the server.
 	 *	@param {string} data The data is in the form "Name=pvp&Value=1".
 	 *	@param {callback} The callback function that is called after the http status is 200.
-	 *	@tutorial data.Post('example.com/get?user="suh dude"?pass="yep yeppers"',function(){});
+	 *	@tutorial data.Post( 'example.com/get?', 'user="suh dude"&pass="yep yeppers"', function(){} );
 	 *	@todo Expand the function.
 	 */
 	data.Post = function (url, data, callback) {

@@ -92,20 +92,31 @@ var registerState = {
 			cloth.focus('passwordInputField');
 		} else if(cloth.retrieve('passwordInputFieldCopy') == ''){
 			cloth.focus('passwordInputFieldCopy');
+		} else if(cloth.retrieve('passwordInputField') != cloth.retrieve('passwordInputFieldCopy')) {
+			cloth.focus('passwordInputField');
 		} else {
-			registerState.removeAll();
-			/**	@see menu.js*/
-			game.state.start('menu');
-			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
-				if(JSON.parse(data)['logged'] == 'true'){
-					registerState.removeAll();
-					/**	@see menu.js*/
-					game.state.start('menu');
-				} else {
-					game.debug.text('Invalid Username/Password.',300,480);
-				}
-			});
+			registerState.register();
 		}
+	},
+	/**
+	 *	@description This function makes a Post to the server. It creates an entry in the data base and generates a new character sheet.
+	 *	@see testserver.js
+	 *	@see data#Post
+	 *	@see bootState#user
+	 *	@memberof registerState
+	 *	@function register
+	 */
+	register: function(){
+		data.Post('/register','id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField')+'&email='+cloth.retrieve('emailInputField'), function(data){
+			if(JSON.parse(data)['registered'] == 'true'){
+				bootState.user = {'username':cloth.retrieve('usernameInputField')};
+				registerState.removeAll();
+				/**	@see menu.js*/
+				game.state.start('menu');
+			} else {
+				game.debug.text('Account did not create',300,480);
+			}
+		});
 	},
 	/**
 	 *	@description This function removes all the html elements.

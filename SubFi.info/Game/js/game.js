@@ -41,7 +41,7 @@ game.state.add('login',loginState);
 game.state.add('register',registerState);
 game.state.add('menu',menuState);
 //game.state.add('settings',settingsState);
-// game.state.add('chat',chatState);
+game.state.add('chat',chatState);
 // game.state.add('skill',skillState);
 // game.state.add('character',characterState);
 // game.state.add('inventory',inventoryState);

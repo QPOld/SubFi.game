@@ -44,6 +44,7 @@ var loginState = {
 			'type' : 'password',
 			'placeholder' : 'Password',
 		});
+		// Phaser does not like html buttons.
 		var submitButton = game.add.button(15, 150, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
 		var registerButton = game.add.button(105, 150, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 	},
@@ -82,18 +83,29 @@ var loginState = {
 		} else if(cloth.retrieve('passwordInputField') == ''){
 			cloth.focus('passwordInputField');
 		} else {
-			loginState.removeAll();
-			game.state.start('menu');
-			data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
-				if(JSON.parse(data)['logged'] == 'true'){
-					loginState.removeAll();
-					/**	@see menu.js*/
-					game.state.start('menu');
-				} else {
-					game.debug.text('Invalid Username/Password.',300,480);
-				}
-			});
+			loginState.login();
 		}
+	},
+	/**
+	 *	@description Small login function. Makes a get request to the server to check the database if
+	 *		the username and password make an entry. If the user does exist and the password is correct
+	 *		then the global object { @see bootState#user} is updated with the users name.
+	 *	@see data#Get
+	 *	@see testserver.js
+	 *	@memberof loginState
+	 *	@function login
+	 */
+	login: function(){
+		data.Get('/login?id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField'), function(data){
+			if(JSON.parse(data)['logged'] == 'true'){
+				bootState.user = {'username':cloth.retrieve('usernameInputField')};
+				loginState.removeAll();
+				/**	@see menu.js*/
+				game.state.start('menu');
+			} else {
+				game.debug.text('Invalid Username/Password.',300,480);
+			}
+		});
 	},
 	/**
 	 *	@description This function removes all the html elements.

@@ -17,8 +17,9 @@ var io = require('socket.io')(server);
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/userInfo');
+var bodyParser = require('body-parser');
  
-// Start server
+
 console.log(sitePath);
 console.log("Starting server in: " + __dirname + '/' + sitePath);
 app.use(express.static(__dirname + '/' + sitePath));
@@ -26,6 +27,10 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 //Helper functions
 function isEmpty (obj) {
 	for(var prop in obj) {
@@ -34,7 +39,19 @@ function isEmpty (obj) {
 	}
 	return true;
 };
-//gets
+app.get('/retrieve',function(req,res){
+	var user = req.query['id'];
+	var collection = db.get('usercollection');
+	collection.find({'username': user},function(err,docs){
+		if (err == null) {
+			if (!isEmpty(docs)){
+				delete docs[0].password;
+				delete docs[0].email;
+				res.send(docs);
+			}
+		}
+	});
+});
 app.get('/login',function(req,res){
 	var user = req.query['id'];
 	var pass = req.query['pass'];
@@ -49,21 +66,49 @@ app.get('/login',function(req,res){
 		}
 	});
 });
-app.get('/register',function(req,res){
-	var email = req.query['email'];
-	var user = req.query['id'];
-	var pass = req.query['pass'];
+app.post('/register',function(req,res){
+	var email = req.body.email;
+	var user = req.body.id;
+	var pass = req.body.pass;
 	var collection = db.get('usercollection');
-	collection.insert({'username': user,'password':pass,'email':email},function(err,docs){
+	var key = {'username' : user};
+	
+	var data = {
+		'username': user,
+		'password':pass,
+		'email':email,
+		'level':1,
+		'experience':0,
+		'intelligence':5,
+		'dexterity':5,
+		'strength':5,
+		'consitution':5,
+		'focus':5, 
+		'points':0 ,
+		'itemrank':0,
+		'battlerank':0,
+		'kills':0,
+		'deaths':0,
+		'leaves':0,
+		'pvpflag':0,
+		'matchID':'',
+		'orderID':0,
+		'findID':0
+		};
+	
+	collection.update(key, data,{upsert:true},function(err,docs){
 		if(err == null){
 			res.json({ registered: "true" });
 		}
 	});
 });
 
-
+// Start server
 io.on('connection', function(socket){
   console.log('connect');
+  socket.on('chat message',function(msg){
+	  io.emit('chat message', msg);
+  });
   socket.on('disconnect', function(){
 	  console.log('disconnect');
   });
