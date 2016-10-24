@@ -38,6 +38,10 @@ var loadState = {
 		loadState.chatScreen();
 		loadState.skillScreen();
 		loadState.inventoryScreen();
+		loadState.characterScreen();
+		loadState.rankScreen();
+		loadState.craftScreen();
+		loadState.tradeScreen();
 		loadState.matchScreen();
 	},
 	/**
@@ -156,15 +160,50 @@ var loadState = {
 	 *	@memberof loadState
 	 *	@function skillScreen
 	 */
-	skillScreen: function(){},
+	skillScreen: function(){
+		game.load.image('skillBackgroundScreen', '../assets/skillBackgroundScreen.png');
+	},
 	/**
 	 *	@memberof loadState
 	 *	@function inventoryScreen
 	 */
-	inventoryScreen: function(){},
+	inventoryScreen: function(){
+		game.load.image('inventoryBackgroundScreen', '../assets/inventoryBackgroundScreen.png');
+	},
 	/**
 	 *	@memberof loadState
 	 *	@function matchScreen
 	 */
-	matchScreen: function(){},
+	matchScreen: function(){
+		game.load.image('matchBackgroundScreen', '../assets/matchBackgroundScreen.png');
+	},
+	/**
+	 *	@memberof loadState
+	 *	@function tradeScreen
+	 */
+	tradeScreen: function(){
+		game.load.image('tradeBackgroundScreen', '../assets/tradeBackgroundScreen.png');
+	},
+	/**
+	 *	@memberof loadState
+	 *	@function craftScreen
+	 */
+	craftScreen: function(){
+		game.load.image('craftBackgroundScreen', '../assets/craftBackgroundScreen.png');
+	},
+	/**
+	 *	@memberof loadState
+	 *	@function rankScreen
+	 */
+	rankScreen: function(){
+		game.load.image('rankBackgroundScreen', '../assets/rankBackgroundScreen.png');
+	},
+	/**
+	 *	@memberof loadState
+	 *	@function characterScreen
+	 */
+	characterScreen: function(){
+		game.load.image('characterBackgroundScreen', '../assets/characterBackgroundScreen.png');
+		game.load.image('exitButton', '../assets/exitButton.png');
+	},
 } // End of loadState

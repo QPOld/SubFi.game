@@ -3,14 +3,14 @@
 }
 #chatFieldDiv{
 	position:relative;
-	top:567px;
+	top:537px;
 	left:5px;
-	width:300px;
-	height:120px;
+	width:500px;
+	height:150px;
 }
 #globalChatField{
-	width:300px;
-	height:120px;
+	width:500px;
+	height:150px;
 	list-style-type: none; 
 	margin: 0; 
 	padding: 0;
@@ -35,7 +35,7 @@ ul li {
 }
 #textInputField{
 	position:relative;
-	width:244px;
+	width:444px;
 	height:22px;
 	margin: 0 auto;
 }

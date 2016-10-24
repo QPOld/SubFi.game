@@ -60,7 +60,7 @@ var chatState = {
 			'placeholder' : 'Type Here',
 		});
 		
-		var sendButton = game.add.button(255, 687, 'sendButton', chatState.sendMessage, this, 2, 1, 0);
+		var sendButton = game.add.button(455, 687, 'sendButton', chatState.sendMessage, this, 2, 1, 0);
 	},
 	sendMessage: function(){
 		socket.emit('chat message', bootState.user['username'] +': '+cloth.retrieve('textInputField'));
