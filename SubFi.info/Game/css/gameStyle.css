@@ -39,19 +39,13 @@ ul li {
 	height:22px;
 	margin: 0 auto;
 }
-#loginFieldDiv{
-	position:relative;
-	width:165px;
-	height:74px;
-	padding-left:15px;
-	padding-top:15px;
-}
+
 #registerFieldDiv{
 	position:relative;
-	width:165px;
-	height:148px;
-	padding-left:15px;
-	padding-top:15px;
+	width:171px;
+	height:202px;
+	top:200px;
+	left:555px;
 }
 #emailInputField{
 	position:relative;
@@ -64,12 +58,21 @@ ul li {
 	position:relative;
 	margin: 0 auto;
 	width:165px;
+	margin-top:15px;
 	height:37px;
 	font-size:17px;
+}
+#loginFieldDiv{
+	position:relative;
+	width:171px;
+	height:86px;
+	top:240px;
+	left:555px;
 }
 #passwordInputField{
 	position:relative;
 	margin:  0 auto;
+	margin-top:15px;
 	width:165px;
 	height:37px;
 	font-size:17px;
