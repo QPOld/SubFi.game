@@ -16,7 +16,7 @@ As of right now the game will be hosted at [SubFi.info](https://www.subfi.info/)
 This section will be updated soon!
 
 ### Change Log
-- 0.0.1b-k Updating login and registration state.
+Updating login and registration state.
 
 > **Notes:**
 
