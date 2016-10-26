@@ -72,7 +72,9 @@ app.post('/register',function(req,res){
 	var pass = req.body.pass;
 	var collection = db.get('usercollection');
 	var key = {'username' : user};
-	
+	//How to add a new column. The first true is for upsert, i.e. create if doesn't exist, and 
+	//the second true is multi, i.e. do it to all docs.
+	//collection.update({},{$set:{"newColumnName":newColumnValue}},true,true)
 	var data = {
 		'username': user,
 		'password':pass,
@@ -93,12 +95,33 @@ app.post('/register',function(req,res){
 		'pvpflag':0,
 		'matchID':'',
 		'orderID':0,
-		'findID':0
+		'findID':0,
+		'attempts':0
 		};
-	
-	collection.update(key, data,{upsert:true},function(err,docs){
-		if(err == null){
-			res.json({ registered: "true" });
+	// Make this not callback hell.
+	// Create functions or modulize or something.
+	// It does work though.
+	collection.find({'username':user},function(err,docs){
+		if (err == null) {
+			if (!isEmpty(docs)){
+				res.json({ registered: "false" });
+			} else {
+				collection.find({'email':email},function(err,docs){
+					if (err == null) {
+						if (!isEmpty(docs)){
+							res.json({ registered: "false" });
+						} else {
+							collection.update(key, data,{upsert:true},function(err,docs){
+								if(err == null){
+									res.json({ registered: "true" });
+								} else {
+									res.json({ registered: "Error" });
+								}
+							});
+						}
+					}
+				});
+			}
 		}
 	});
 });

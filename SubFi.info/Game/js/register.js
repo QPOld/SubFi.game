@@ -61,8 +61,9 @@ var registerState = {
 			'type' : 'password',
 			'placeholder' : 'Password Again',
 		});
-		var submitButton = game.add.button(555, 417, 'submitButton', registerState.goToMenuScreen, this, 2, 1, 0);
-		var backButton = game.add.button(651, 417, 'backButton', registerState.goToLoginScreen, this, 2, 1, 0);
+		// Phaser does not like html buttons.
+		var submitButton = game.add.button(603, 417, 'submitButton', registerState.goToMenuScreen, this, 2, 1, 0);
+		var backButton = game.add.button( 15, 15, 'backButton', registerState.goToLoginScreen, this, 2, 1, 0);
 	},
 	
 	/**
@@ -86,7 +87,7 @@ var registerState = {
 	 *	@function goToLoginScreen
 	 */
 	goToLoginScreen: function(){
-		registerState.removeAll();
+		cloth.remove('registerFieldDiv');
 		/**	@see login.js */
 		game.state.start('login');
 	},
@@ -102,21 +103,50 @@ var registerState = {
 	 *
 	 *	@function catchError
 	 *
+	 *	@todo Add in additional password requirements. Things that are typical these days.
 	 */
 	catchError: function(){
-		if(cloth.retrieve('emailInputField') == ''){
+		var email = cloth.retrieve('emailInputField');
+		var username = cloth.retrieve('usernameInputField');
+		var password = cloth.retrieve('passwordInputField');
+		var passwordCopy = cloth.retrieve('passwordInputFieldCopy');
+		var text;
+		if(email == ''){
+			registerState.displayErrorText(752, 218, "Email Is Missing.")
 			cloth.focus('emailInputField');
-		} else if(cloth.retrieve('usernameInputField') == ''){
+		} else if(username == ''){
+			registerState.displayErrorText(752, 276, "Username Is Missing.")
 			cloth.focus('usernameInputField');
-		} else if(cloth.retrieve('passwordInputField') == ''){
+		} else if(password == ''){
+			registerState.displayErrorText(752, 334, "Password Is Missing.")
 			cloth.focus('passwordInputField');
-		} else if(cloth.retrieve('passwordInputFieldCopy') == ''){
+		} else if(passwordCopy == ''){
+			registerState.displayErrorText(752, 377, "Password Copy Is Missing.")
 			cloth.focus('passwordInputFieldCopy');
-		} else if(cloth.retrieve('passwordInputField') != cloth.retrieve('passwordInputFieldCopy')) {
+		} else if(password != passwordCopy) {
+			registerState.displayErrorText(752, 355, "Passwords do not match.")
 			cloth.focus('passwordInputField');
 		} else {
 			registerState.register();
 		}
+	},
+	
+	/**
+	 *	@description Displays error text. It will try to destroy any previous error text
+	 *		before creating new error text. The x and y parameters are similar to 
+	 *		cartesian coordinates starting from the top left hand corner.
+	 *
+	 *	@memberof registerState
+	 *
+	 *	@function displayErrorText
+	 *
+	 *	@param {number} x The x position of the text.
+	 *	@param {number} y The y position of the text.
+	 *	@param {string} text The text for the error message.
+	 */
+	displayErrorText: function(x,y,errorText){
+		try {text.destroy()} catch(err) {}
+			text = game.add.text(x, y, errorText,{ font: "17px Arial", fill: "#ff0044"});
 	},
 	
 	/**
@@ -134,25 +164,19 @@ var registerState = {
 		data.Post('/register','id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField')+'&email='+cloth.retrieve('emailInputField'), function(data){
 			if(JSON.parse(data)['registered'] == 'true'){
 				bootState.user = {'username':cloth.retrieve('usernameInputField')};
-				registerState.removeAll();
+				cloth.remove('registerFieldDiv');
 				/**	@see menu.js*/
 				game.state.start('menu');
+			} else if(JSON.parse(data)['registered'] == 'Error'){
+				registerState.displayErrorText(735, 260, "Connection Error.")
 			} else {
-				game.debug.text('Account did not create',300,480);
+				cloth.value('emailInputField','');
+				cloth.value('usernameInputField','');
+				cloth.value('passwordInputField','');
+				cloth.value('passwordInputFieldCopy','');
+				registerState.displayErrorText(735, 260, "Email or Username Is In Use.")
 			}
 		});
 	},
-	
-	/**
-	 *	@description This function removes all the html elements.
-	 *
-	 *	@memberof registerState
-	 *
-	 *	@function removeAll
-	 *
-	 *	@todo Expand this function.
-	 */
-	removeAll: function(){
-		cloth.remove('registerFieldDiv');
-	},
-}
+
+}// End of registerState.
