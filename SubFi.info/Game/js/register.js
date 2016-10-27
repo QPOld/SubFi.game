@@ -159,6 +159,8 @@ var registerState = {
 	 *	@memberof registerState
 	 *
 	 *	@function register
+	 *
+	 *	@todo Create unique registered error codes and not Error or true or false. Those are silly.
 	 */
 	register: function(){
 		data.Post('/register','id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField')+'&email='+cloth.retrieve('emailInputField'), function(data){

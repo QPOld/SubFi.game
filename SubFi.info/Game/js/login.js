@@ -1,7 +1,8 @@
 /**
  *	@description The user login page. It contains two forms for a username and password.
- *		The user may select submit or select to go to the register page. Upon a succesful
- *		login attempt the user object { @see boot.js} is updated with the user info.
+ *		The user may select submit, to go to the register page, or retrieve a forgotten
+ *		username/password. Upon a succesful login attempt the user object { @see boot.js}
+ *		is updated with the user info.
  *
  *	@author Michael Parkinson <SubFiApp@gmail.com>
  */
@@ -36,6 +37,8 @@ var loginState = {
 	 *	@memberof loginState
 	 *
 	 *	@function loginForm
+	 *
+	 *	@todo Create an exit button for closing app to the desktop. Future need with electron.
 	 */
 	loginForm: function(){
 		
@@ -65,6 +68,7 @@ var loginState = {
 		var submitButton = game.add.button(555, 360, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
 		var registerButton = game.add.button(651, 360, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 		var forgotButton = game.add.button(555, 417, 'forgotButton', loginState.goToForgotScreen, this, 2, 1, 0);
+
 	}, // End of loginState.loginForm.
 	
 	/**

@@ -101,31 +101,79 @@ app.post('/register',function(req,res){
 	// Make this not callback hell.
 	// Create functions or modulize or something.
 	// It does work though.
+	// What is too deep?
+	// Its like fucked up code but it is just three things that
+	//  must be called and checked.
+	
+	// Check out async or write it recursively.
+	// Maybe find someone who can comment on it.
+	
+	// find user.
 	collection.find({'username':user},function(err,docs){
 		if (err == null) {
 			if (!isEmpty(docs)){
 				res.json({ registered: "false" });
 			} else {
+				
+				// find email.
 				collection.find({'email':email},function(err,docs){
 					if (err == null) {
 						if (!isEmpty(docs)){
 							res.json({ registered: "false" });
 						} else {
+							
+							//create user.
 							collection.update(key, data,{upsert:true},function(err,docs){
 								if(err == null){
 									res.json({ registered: "true" });
 								} else {
 									res.json({ registered: "Error" });
 								}
-							});
+							}); // end of create user.
+							
 						}
 					}
-				});
+				}); // end of find email.
+				
+			}
+		}
+	}); // end of find user.
+	
+	// checkUsername(collection,user,email,key,data);
+}); // End of /register.
+function checkUsername(collection,user,email,key,data){
+	collection.find({'username':user},function(err,docs){
+		if (err == null) {
+			if (!isEmpty(docs)){
+				res.json({ registered: "false" });
+			} else {
+				checkEmail(collection,user,email,key,data);
 			}
 		}
 	});
-});
-
+};
+function checkEmail(collection,user,email,key,data){
+	collection.find({'email':email},function(err,docs){
+		if (err == null) {
+			if (!isEmpty(docs)){
+				res.json({ registered: "false" });
+			} else {
+				createUserInfo(collection,user,email,key,data);
+			}
+		}
+	});
+};
+function createUserInfo(collection,user,email,key,data){
+	collection.update(key, data,{upsert:true},function(err,docs){
+		if(err == null){
+			console.log('true',user,email,key,data)
+			res.json({ registered: "true" });
+		} else {
+			console.log('false',user,email,key,data)
+			res.json({ registered: "Error" });
+		}
+	});
+};
 // Start server
 io.on('connection', function(socket){
   console.log('connect');

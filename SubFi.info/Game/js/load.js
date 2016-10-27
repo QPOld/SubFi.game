@@ -113,7 +113,7 @@ var loadState = {
 		/** 
 		 *	@description The -1 comes from a clipping issue on most browers where a single pixel
 		 *		line is missing from the height. This is a hacky solution to a strange problem
-		 *		brought up on the Phaser development forums. Its really just a phaser problem
+		 *		brought up on the Phaser development forums. It's a phaser problem
 		 *		I believe.
 		 *
 		 *	@param {number} innerHeight Defines the canvas height.
