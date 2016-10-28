@@ -72,7 +72,9 @@ app.post('/forgot',function(req, res){
 	var email = req.body.email;
 	var collection = db.get('usercollection');
 	var key = {'email' : email};
-	var transporter = nodemailer.createTransport('smtps://SubFiApp%40gmail.com:gSaqN345@smtp.gmail.com');
+	//ADD TRANSPORTER HERE
+	// FIND A WAY TO NOT SHOW LOGIN INFO
+	
 	async.waterfall([
 		function(callback){
 			////find user
