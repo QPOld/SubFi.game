@@ -11,6 +11,7 @@ var settingsState = {
 		game.state.start('menu');
 	},
 	goToLoginScreen: function(){
+		cloth.remove('chatFieldDiv');
 		bootState.user = {};
 		game.state.start('login');
 	},

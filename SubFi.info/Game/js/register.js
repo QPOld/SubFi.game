@@ -106,9 +106,6 @@ var registerState = {
 	 *	@todo Add in additional password requirements. Things that are typical these days.
 	 */
 	catchError: function(){
-		errors = {
-			'' : 'Missing Input'
-		};
 		var email = cloth.retrieve('emailInputField');
 		var username = cloth.retrieve('usernameInputField');
 		var password = cloth.retrieve('passwordInputField');

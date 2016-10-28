@@ -80,19 +80,13 @@ var loginState = {
 	 *	@see loginState#catchError
 	 *	@see cloth#retrieve
 	 *	@see cloth#focus
-	 *	@see loginState#login
+	 *	@see loginState
 	 *
 	 *	@function goToMenuScreen
 	 *
 	 */
 	goToMenuScreen: function(){
-		if(loginState.catchError(cloth.retrieve('usernameInputField')) == 'No Input') {
-			cloth.focus('usernameInputField');
-		} else if(loginState.catchError(cloth.retrieve('passwordInputField')) == 'No Input') {
-			cloth.focus('passwordInputField');
-		} else {
-			loginState.login();
-		}
+		loginState.catchError();
 	}, // End of loginState.goToMenuScreen.
 	
 	/**
@@ -110,18 +104,25 @@ var loginState = {
 	
 	/**
 	 *	@description The login error handler. It makes sure that each input field is
-	 *		is filled with correct infomation.
+	 *		is filled with correct infomation. It calls the data.Get function
 	 *
+	 *	@see data.js
+	 *	@see cloth.js
 	 *
 	 *	@memberof loginState
 	 *
 	 *	@function catchError
 	 */
-	catchError: function(field){
-		errors = {
-			'' : 'No Input'
-		};
-		return (errors[field] || true)
+	catchError: function(){
+		var username = cloth.retrieve('usernameInputField');
+		var password = cloth.retrieve('passwordInputField');
+		if(username == '') {
+			cloth.focus('usernameInputField');
+		} else if(password == '') {
+			cloth.focus('passwordInputField');
+		} else {
+			loginState.login();
+		}
 	}, // End of loginState.catchError.
 	
 	/**

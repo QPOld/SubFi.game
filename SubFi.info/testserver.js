@@ -19,6 +19,7 @@ var monk = require('monk');
 var db = monk('localhost:27017/userInfo');
 var bodyParser = require('body-parser');
 var async = require('async');
+var nodemailer = require('nodemailer');
  
 
 console.log(sitePath);
@@ -30,7 +31,7 @@ app.use(function(req,res,next){
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false
+	extended: false
 }));
 //Helper functions
 function isEmpty (obj) {
@@ -65,6 +66,56 @@ app.get('/login',function(req,res){
 				res.json({ logged: "false" });
 			}
 		}
+	});
+});
+app.post('/forgot',function(req, res){
+	var email = req.body.email;
+	var collection = db.get('usercollection');
+	var key = {'email' : email};
+	var transporter = nodemailer.createTransport('smtps://SubFiApp%40gmail.com:gSaqN345@smtp.gmail.com');
+	async.waterfall([
+		function(callback){
+			////find user
+			collection.find(key,function(err,docs){
+				if (err == null) {
+					if (!isEmpty(docs)){
+						res.json({ forgot: "true" });
+						callback(null,docs[0].email,docs[0].username,docs[0].password);
+					} else {
+						res.json({ forgot: "false" });
+						callback(false,'','','')
+					}
+				}
+			}); // end of find user.
+		},
+		function(email,username,password,callback){
+			if(email != ''){
+				////send mail with defined transport object
+				var mailOptions = {
+					from: '"SubFi App" <SubFiApp@gmail.com>', // sender address
+					to: email, // list of receivers
+					subject: 'Account Information', // Subject line
+					html: '<p>Account Name: '+username+'</p><p>Password: '+password+'</p>' // html body
+				};
+				transporter.sendMail(mailOptions, function(error, info){
+					if(error){
+						console.log(error)
+						callback(false);
+					} else {
+						callback(null,'done');
+					}
+				});
+			} else {
+				callback(false);
+			}
+			
+		},
+	],
+	function(err,results){
+		if(err == false){
+			console.log('yep');
+		}
+		
 	});
 });
 app.post('/register',function(req,res){

@@ -64,10 +64,12 @@ var menuState = {
 			});
 	},
 	//////// LEFT OFF HERE ////////
+	//////// ALWAYS REMOVE ANY HTML DIV ////////
 	/**
 	 *
 	 */
 	goToSettingsScreen: function(){
+		cloth.remove('chatFieldDiv');
 		/**	@see settings.js */
 		game.state.start('settings');
 	},

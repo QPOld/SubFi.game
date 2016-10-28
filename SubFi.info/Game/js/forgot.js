@@ -25,7 +25,14 @@ var forgotState = {
 		game.state.start('login');
 	},
 	sendUserInfo: function(){
-		cloth.remove('loginFieldDiv');
-		game.state.start('login');
+		data.Post('/forgot','email='+cloth.retrieve('emailInputField'), function(data){
+			if(JSON.parse(data)['forgot'] == 'true'){
+				cloth.remove('loginFieldDiv');
+				game.state.start('login');
+			} else if(JSON.parse(data)['forgot'] == 'false') {
+				cloth.value('emailInputField','');
+				registerState.displayErrorText(555, 180, "Email Did Not Send.");
+			}
+		})
 	},
 };
