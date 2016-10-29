@@ -37,13 +37,13 @@ var menuState = {
 		var height = bootState.height;
 		var mainBackgroundScreen = game.add.tileSprite(0, 0, width, height, 'mainBackgroundScreen');
 		var settingsButton = game.add.button(width - 72, 28, 'settingsButton',menuState.goToSettingsScreen , this, 2, 1, 0);
-		var chatButton = game.add.button(width - 144, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
-		var skillButton = game.add.button(width - 432, 28, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
+		var chatButton = game.add.button(width - 360, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
+		var skillButton = game.add.button(width - 144, 28, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
 		var inventoryButton = game.add.button(width - 504, 28, 'inventoryButton', menuState.goToInventoryScreen, this, 2, 1, 0);
 		var characterButton = game.add.button(width - 576, 28, 'characterButton', menuState.goToCharacterScreen, this, 2, 1, 0);
 		var tradeButton = game.add.button(width - 216, 28, 'tradeButton', menuState.goToTradeScreen, this, 2, 1, 0);
 		var craftButton = game.add.button(width - 288, 28, 'craftButton', menuState.goToCraftScreen, this, 2, 1, 0);
-		var rankButton = game.add.button(width - 360, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
+		var rankButton = game.add.button(width - 432, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
 		var matchButton = game.add.button(15, 15, 'matchButton', menuState.goToMatchScreen, this, 2, 1, 0);
 	},
 	

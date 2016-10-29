@@ -154,6 +154,7 @@ var loadState = {
 		game.load.image('submitButton', '../assets/submitButton.png')
 		game.load.image('registerButton', '../assets/registerButton.png')
 		game.load.image('forgotButton', '../assets/forgotButton.png')
+		game.load.image('exitProgramButton', '../assets/exitProgramButton.png')
 	}, // End of loadState.loginScreen.
 	
 	/**

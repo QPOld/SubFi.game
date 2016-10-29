@@ -18,7 +18,7 @@ var forgotState = {
 			'placeholder' : 'Email',
 		});
 		var backButton = game.add.button( 15, 15, 'backButton',forgotState.goToLoginScreen, this, 2 , 1, 0);
-		var submitButton = game.add.button(755, 240, 'submitButton', forgotState.sendUserInfo, this, 2, 1, 0);
+		var submitButton = game.add.button(755, 240, 'submitButton', forgotState.catchError, this, 2, 1, 0);
 	},
 	goToLoginScreen: function(){
 		cloth.remove('loginFieldDiv');
@@ -34,5 +34,12 @@ var forgotState = {
 				registerState.displayErrorText(555, 180, "Email Did Not Send.");
 			}
 		})
+	},
+	catchError: function(){
+		if(cloth.retrieve('emailInputField') == ''){
+			cloth.focus('emailInputField')
+		} else {
+			forgotState.sendUserInfo();
+		}
 	},
 };

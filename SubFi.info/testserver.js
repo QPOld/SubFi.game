@@ -10,17 +10,17 @@ var sitePath = process.argv[2] || ".";
 var port = 4242;
 
 // Requires
+var config = require('./config.js')
 var express = require('express');  
 var app = express();  
 var server = require('http').createServer(app);  
 var io = require('socket.io')(server);
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/userInfo');
+var db = monk(config.db.development);
 var bodyParser = require('body-parser');
 var async = require('async');
 var nodemailer = require('nodemailer');
- 
 
 console.log(sitePath);
 console.log("Starting server in: " + __dirname + '/' + sitePath);
@@ -74,7 +74,7 @@ app.post('/forgot',function(req, res){
 	var key = {'email' : email};
 	//ADD TRANSPORTER HERE
 	// FIND A WAY TO NOT SHOW LOGIN INFO
-	
+	var transporter = nodemailer.createTransport('smtps://'+config.mailer.auth.user+'%40gmail.com:'+config.mailer.auth.pass+'@smtp.gmail.com');
 	async.waterfall([
 		function(callback){
 			////find user
@@ -93,11 +93,12 @@ app.post('/forgot',function(req, res){
 		function(email,username,password,callback){
 			if(email != ''){
 				////send mail with defined transport object
+				config.mailer.supportHtml();
 				var mailOptions = {
-					from: '"SubFi App" <SubFiApp@gmail.com>', // sender address
+					from: config.mailer.defaultFromAddress, // sender address
 					to: email, // list of receivers
-					subject: 'Account Information', // Subject line
-					html: '<p>Account Name: '+username+'</p><p>Password: '+password+'</p>' // html body
+					subject: 'Requested Account Information', // Subject line
+					html: config.mailer.supportHtml(email,username,password)
 				};
 				transporter.sendMail(mailOptions, function(error, info){
 					if(error){

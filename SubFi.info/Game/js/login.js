@@ -68,6 +68,7 @@ var loginState = {
 		var submitButton = game.add.button(555, 360, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
 		var registerButton = game.add.button(651, 360, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 		var forgotButton = game.add.button(555, 417, 'forgotButton', loginState.goToForgotScreen, this, 2, 1, 0);
+		var exitProgramButton = game.add.button(1245,10,'exitProgramButton',loginState.goToExitScreen, this, 2, 1, 0);
 
 	}, // End of loginState.loginForm.
 	
@@ -164,4 +165,17 @@ var loginState = {
 		cloth.remove('loginFieldDiv');
 		game.state.start('forgot');
 	}, // End of loginState.goToForgotScreen.
+	
+	/**
+	 *	@description Exits the program. This button will be implemented when 
+	 *		electron is used to created desktop versions of the game.
+	 *
+	 *	@memberof loginState
+	 *
+	 *	@function goToExitScreen
+	 *
+	 */
+	goToExitScreen: function(){
+		game.debug.text("Exit Program Hit", 400,380);
+	},// End of loginState.goToExitScreen.
 };
