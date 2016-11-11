@@ -1,13 +1,6 @@
 #gameDiv{
 	position:absolute
 }
-#chatFieldDiv{
-	position:relative;
-	top:537px;
-	left:5px;
-	width:500px;
-	height:150px;
-}
 #globalChatField{
 	width:500px;
 	height:150px;
@@ -39,14 +32,6 @@ ul li {
 	height:22px;
 	margin: 0 auto;
 }
-
-#registerFieldDiv{
-	position:relative;
-	width:171px;
-	height:202px;
-	top:200px;
-	left:555px;
-}
 #emailInputField{
 	position:relative;
 	margin: 0 auto;
@@ -62,13 +47,7 @@ ul li {
 	height:37px;
 	font-size:17px;
 }
-#loginFieldDiv{
-	position:relative;
-	width:171px;
-	height:86px;
-	top:240px;
-	left:555px;
-}
+
 #passwordInputField{
 	position:relative;
 	margin:  0 auto;
@@ -84,6 +63,40 @@ ul li {
 	height:37px;
 	font-size:17px;
 }
+#registerFieldDiv{
+	position:relative;
+	width:171px;
+	height:202px;
+	top:200px;
+	left:555px;
+	animation-name: FadeIn;
+    animation-duration: 3s;
+}
+#loginFieldDiv{
+	position:relative;
+	width:171px;
+	height:86px;
+	top:240px;
+	left:555px;
+	animation-name: FadeIn;
+    animation-duration: 3s;
+}
+#forgotFieldDiv{
+	position:relative;
+	width:171px;
+	height:86px;
+	top:240px;
+	left:555px;
+	animation-name: FadeIn;
+    animation-duration: 3s;
+}
+#chatFieldDiv{
+	position:relative;
+	top:537px;
+	left:5px;
+	width:500px;
+	height:150px;
+}
 input[type=text]:focus, textarea:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   padding: 3px 0px 3px 3px;
@@ -95,4 +108,12 @@ input[type=password]:focus, textarea:focus {
   padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;
   border: 1px solid rgba(81, 203, 238, 1);
+}
+@keyframes FadeIn {
+    from {
+		opacity: 0;
+		}
+    to {
+		opacity: 1;
+		}
 }

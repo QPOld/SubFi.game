@@ -14,7 +14,8 @@ var rankState = {
 	},
 	/***/
 	goToMainScreen: function(){
-		cloth.remove('chatFieldDiv');
+		bootState.states.rank = false;
+		// game.add.tween('rankBackgroundScreen').to( {x: -2000}, bootState.speed,  "Linear", true)
 		game.state.start('menu');
 	},
 }

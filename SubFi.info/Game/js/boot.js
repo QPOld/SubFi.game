@@ -19,9 +19,11 @@ var bootState = {
 	 *	@function create
 	 */
 	create: function() {
-		/** @see game.js */
+		
+		/** @see game */
 		game.state.start('load');
 		console.log('bootState Complete.'); // Remove upon release.
+		
 	},
 	
 	/**
@@ -51,5 +53,29 @@ var bootState = {
 	 *	@constant {object} user	
 	 */
 	 user:{},
+	 
+	 /**
+	 *	@description Stores the open states for the menu of the connected user. 
+	 *
+	 *	@memberof bootState
+	 *
+	 *	@constant {object} states	
+	 */
+	states:{
+		chat:false,
+		character:false,
+		inventory:false,
+		rank:false
+	},
+	 
+	/**
+	 *	@description Stores the tween speed for state transitions.
+	 *
+	 *	@memberof bootState
+	 *
+	 *	@constant {number} speed
+	 */
+	 speed:750,
+	 
 	
 }; //End of bootState.

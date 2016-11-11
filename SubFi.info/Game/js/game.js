@@ -21,7 +21,7 @@
  *	@constant {number} width
  *	@constant {number} height
  */
-var width = 1280, height = 720,div = 'gameDiv', game = new Phaser.Game(width, height, Phaser.AUTO, div);
+var width = 1280, height = 720, div = 'gameDiv', game = new Phaser.Game(width, height, Phaser.AUTO, div);
 
 /** 
  *	@description Each game state is a unique js file. Each state is added in logical order. 
@@ -30,24 +30,6 @@ var width = 1280, height = 720,div = 'gameDiv', game = new Phaser.Game(width, he
  *		phaser api for revealing a new state from a previous state. Each state is just a 
  *		namespace containg more standard phaser api. The name infront of the word State in
  *		each namespace is the actual name of the namespace when it is referenced within Phaser.
- *
- *	@namespace bootState
- *	@namespace loadState
- *	@namespace loginState
- *	@namespace registerState
- *	@namespace menuState
- *	@namespace settingsState
- *	@namespace chatState
- *	@namespace skillState
- *	@namespace characterState
- *	@namespace inventoryState
- *	@namespace rankState
- *	@namespace craftState
- *	@namespace tradeState
- *	@namespace matchState
- *
- *	@function game.state.add
- *	@function game.state.start
  */
 game.state.add('boot',bootState);
 game.state.add('load',loadState);

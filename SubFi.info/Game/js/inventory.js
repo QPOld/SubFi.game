@@ -14,7 +14,8 @@ var inventoryState = {
 	},
 	/***/
 	goToMainScreen: function(){
-		cloth.remove('chatFieldDiv');
+		bootState.states.inventory = false;
 		game.state.start('menu');
+		// menuState.recreateStates(bootState.states)
 	},
 };

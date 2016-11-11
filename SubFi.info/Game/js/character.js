@@ -14,7 +14,8 @@ var characterState = {
 	},
 	/***/
 	goToMainScreen: function(){
-		cloth.remove('chatFieldDiv');
+		bootState.states.character = false;
+		// game.add.tween('characterBackgroundScreen').to( {x: -2000}, bootState.speed,  "Linear", true)
 		game.state.start('menu');
 	},
 }

@@ -21,6 +21,7 @@ var db = monk(config.db.development);
 var bodyParser = require('body-parser');
 var async = require('async');
 var nodemailer = require('nodemailer');
+var favicon = require('serve-favicon');
 
 console.log(sitePath);
 console.log("Starting server in: " + __dirname + '/' + sitePath);
@@ -33,6 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
+// app.use(app.use(favicon(__dirname + config.favicon.path)));
 //Helper functions
 function isEmpty (obj) {
 	for(var prop in obj) {

@@ -24,7 +24,6 @@ var chatState = {
 		console.log('chatState Complete.'); // Remove upon release.
 	},
 	update: function(){
-		
 		socket.on('chat message', function(msg){
 			if(document.getElementById('chat_'+chatState.maxLI).innerHTML != msg){
 				for(i=1;i<chatState.maxLI;i++){

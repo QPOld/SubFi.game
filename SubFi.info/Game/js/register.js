@@ -25,6 +25,9 @@ var registerState = {
 	 *	@description Main function for the register screen. Allows the user to input their 
 	 *		email address, username, and password for the account.
 	 *
+	 *	@see bootState#width
+	 *	@see bootState#height
+	 *
 	 *	@memberof registerState
 	 *
 	 *	@function registerForm
@@ -61,9 +64,15 @@ var registerState = {
 			'type' : 'password',
 			'placeholder' : 'Password Again',
 		});
+		
 		// Phaser does not like html buttons.
 		var submitButton = game.add.button(603, 417, 'submitButton', registerState.goToMenuScreen, this, 2, 1, 0);
 		var backButton = game.add.button( 15, 15, 'backButton', registerState.goToLoginScreen, this, 2, 1, 0);
+		var buttonGroup = game.add.group();
+		buttonGroup.add(submitButton);
+		buttonGroup.add(backButton);
+		buttonGroup.alpha = 0;
+		game.add.tween(buttonGroup).to( {alpha: 1}, bootState.speed,  "Linear", true)
 	},
 	
 	/**
@@ -75,7 +84,9 @@ var registerState = {
 	 *	@function goToMenuScreen
 	 */
 	goToMenuScreen: function(){
+		
 		registerState.catchError();
+		
 	},
 	
 	/**
@@ -87,17 +98,20 @@ var registerState = {
 	 *	@function goToLoginScreen
 	 */
 	goToLoginScreen: function(){
+		
 		cloth.remove('registerFieldDiv');
+		
 		/**	@see login.js */
 		game.state.start('login');
+		
 	},
 	
 	/**
 	 *	@description The login error handler. It makes sure that each input field is
 	 *		is filled with correct infomation. It calls the data.Get function
 	 *
-	 *	@see data.js
-	 *	@see cloth.js
+	 *	@see cloth#retrieve
+	 *	@see cloth#focus
 	 *
 	 *	@memberof registerState
 	 *
@@ -106,35 +120,49 @@ var registerState = {
 	 *	@todo Add in additional password requirements. Things that are typical these days.
 	 */
 	catchError: function(){
+		
 		var email = cloth.retrieve('emailInputField');
 		var username = cloth.retrieve('usernameInputField');
 		var password = cloth.retrieve('passwordInputField');
 		var passwordCopy = cloth.retrieve('passwordInputFieldCopy');
-		var text;
+		
 		if(email == ''){
-			registerState.displayErrorText(752, 218, "Email Is Missing.")
+			
+			registerState.displayErrorText(752, 218, "Email Is Missing.");
 			cloth.focus('emailInputField');
+			
 		} else if(username == ''){
-			registerState.displayErrorText(752, 276, "Username Is Missing.")
+			
+			registerState.displayErrorText(752, 276, "Username Is Missing.");
 			cloth.focus('usernameInputField');
+			
 		} else if(password == ''){
-			registerState.displayErrorText(752, 334, "Password Is Missing.")
+			
+			registerState.displayErrorText(752, 334, "Password Is Missing.");
 			cloth.focus('passwordInputField');
+			
 		} else if(passwordCopy == ''){
-			registerState.displayErrorText(752, 377, "Password Copy Is Missing.")
+			
+			registerState.displayErrorText(752, 377, "Password Copy Is Missing.");
 			cloth.focus('passwordInputFieldCopy');
+			
 		} else if(password != passwordCopy) {
-			registerState.displayErrorText(752, 355, "Passwords do not match.")
+			
+			registerState.displayErrorText(752, 355, "Passwords do not match.");
 			cloth.focus('passwordInputField');
+			
 		} else {
+			
 			registerState.register();
+			
 		}
 	},
 	
 	/**
 	 *	@description Displays error text. It will try to destroy any previous error text
-	 *		before creating new error text. The x and y parameters are similar to 
-	 *		cartesian coordinates starting from the top left hand corner.
+	 *		before creating new error text. This requires the variable text to be global.
+	 *		The x and y parameters are similar to cartesian coordinates starting from 
+	 *		the top left hand corner.
 	 *
 	 *	@memberof registerState
 	 *
@@ -145,6 +173,7 @@ var registerState = {
 	 *	@param {string} text The text for the error message.
 	 */
 	displayErrorText: function(x,y,errorText){
+		
 		try {text.destroy()} catch(err) {}
 			text = game.add.text(x, y, errorText,{ font: "17px Arial", fill: "#ff0044"});
 	},
@@ -152,8 +181,10 @@ var registerState = {
 	/**
 	 *	@description This function makes a Post to the server. It creates an entry in the data base and generates a new character sheet.
 	 *
-	 *	@see testserver.js
 	 *	@see data#Post
+	 *	@see cloth#retrieve
+	 *	@see cloth#remove
+	 *	@see cloth#value
 	 *	@see bootState#user
 	 *
 	 *	@memberof registerState
@@ -163,15 +194,26 @@ var registerState = {
 	 *	@todo Create unique registered error codes and not Error or true or false. Those are silly.
 	 */
 	register: function(){
-		data.Post('/register','id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField')+'&email='+cloth.retrieve('emailInputField'), function(data){
+		
+		data.Post('/register',
+		'id='+cloth.retrieve('usernameInputField')+'&pass='+cloth.retrieve('passwordInputField')+'&email='+cloth.retrieve('emailInputField'),
+		function(data){	
+		
 			if(JSON.parse(data)['registered'] == 'true'){
+				
 				bootState.user = {'username':cloth.retrieve('usernameInputField')};
+				/** Removes the div for the email form. This can not be done in phaser.*/
 				cloth.remove('registerFieldDiv');
+				
 				/**	@see menu.js*/
-				game.state.start('menu');
+				game.state.start('menu',Phaser.Plugin.StateTransition.Out.ScaleUp ,Phaser.Plugin.StateTransition.In.ScaleUp);
+				
 			} else if(JSON.parse(data)['registered'] == 'Error'){
+				
 				registerState.displayErrorText(735, 260, "Connection Error.")
+				
 			} else {
+				
 				cloth.value('emailInputField','');
 				cloth.value('usernameInputField','');
 				cloth.value('passwordInputField','');
@@ -179,6 +221,7 @@ var registerState = {
 				registerState.displayErrorText(735, 260, "Email or Username Is In Use.")
 			}
 		});
+		
 	},
 
 }// End of registerState.

@@ -25,23 +25,9 @@ var loadState = {
 		
 		/**
 		 *	@description All loadState functions will be called in the preload function.
-		 *
-		 *	@function loadState.loadingScreen
-		 *	@function loadState.init
-		 *	@function loadState.loginScreen
-		 *	@function loadState.registerScreen
-		 *	@function loadState.mainScreen
-		 *	@function loadState.settingsScreen
-		 *	@function loadState.chatScreen
-		 *	@function loadState.skillScreen
-		 *	@function loadState.inventoryScreen
-		 *	@function loadState.characterScreen
-		 *	@function loadState.rankScreen
-		 *	@function loadState.craftScreen
-		 *	@function loadState.tradeScreen
-		 *	@function loadState.matchScreen
 		 */
-		loadState.loadingScreen();
+		var loadingLabel;
+		game.load.onLoadStart.add(loadState.loadingScreen,this);
 		loadState.init();
 		loadState.loginScreen();
 		loadState.registerScreen();
@@ -56,6 +42,8 @@ var loadState = {
 		loadState.craftScreen();
 		loadState.tradeScreen();
 		loadState.matchScreen();
+		game.load.onFileComplete.add(loadState.fileComplete, this);
+		
 	},
 	
 	/**
@@ -66,9 +54,11 @@ var loadState = {
 	 *	@function create
 	 */
 	create: function(){
+		
 		/**	@see game.js */
 		game.state.start('login');
 		console.log('loadState Complete.'); // Remove upon release.
+		
 	},
 	
 	/**
@@ -122,12 +112,22 @@ var loadState = {
 		
 		/** Resets all internal variables.*/
 		game.scale.refresh();
+		
 	}, // End of loadState.init.
 	
+	/**
+	 *
+	 */
+	fileComplete: function(progress){
+		loadingLabel.setText("File Complete: " + progress + "%");
+	},
 	/**
 	 *	@description Adds text and images to the screen while the game is loading assets. Right now the game
 	 *		loads quickly essentially making the loading screen non existent. As the game grows in complexity
 	 *		this screen will become very useful.
+	 *
+	 *	@see bootState#width
+	 *	@see bootState#height
 	 *
 	 *	@memberof loadState
 	 *
@@ -136,8 +136,11 @@ var loadState = {
 	 *	@todo Create an awesome animation for the loading screen.
 	 */
 	loadingScreen: function(){
-		var loadingLabel = game.add.text(bootState.width/2,bootState.height/2,'Loading...',{font:'30px Courier'})
+		
+		loadingLabel = game.add.text(bootState.width/2,bootState.height/2,'Loading...',{font:'30px Courier'});
+		
 	}, // End of loadState.loadingScreen.
+	
 	
 	/**
 	 *	@description Loads the background image for the login screen. The input forms for the 
@@ -150,11 +153,13 @@ var loadState = {
 	 *	@function loginScreen
 	 */
 	loginScreen: function(){
+		
 		game.load.image('loginBackgroundScreen','../assets/loginBackgroundScreen.png');
-		game.load.image('submitButton', '../assets/submitButton.png')
-		game.load.image('registerButton', '../assets/registerButton.png')
-		game.load.image('forgotButton', '../assets/forgotButton.png')
-		game.load.image('exitProgramButton', '../assets/exitProgramButton.png')
+		game.load.image('submitButton', '../assets/submitButton.png');
+		game.load.image('registerButton', '../assets/registerButton.png');
+		game.load.image('forgotButton', '../assets/forgotButton.png');
+		game.load.image('exitProgramButton', '../assets/exitProgramButton.png');
+		
 	}, // End of loadState.loginScreen.
 	
 	/**
@@ -164,7 +169,9 @@ var loadState = {
 	 *	@function registerScreen
 	 */
 	registerScreen: function(){
+		
 		game.load.image('registerBackgroundScreen','../assets/registerBackgroundScreen.png');
+		
 	}, // End of loadState.registerScreen.
 	
 	/**
@@ -173,7 +180,9 @@ var loadState = {
 	 *	@function registerScreen
 	 */
 	forgotScreen: function(){
+		
 		game.load.image('forgotBackgroundScreen','../assets/forgotBackgroundScreen.png');
+		
 	}, // End of loadState.forgotScreen.
 	
 	/**
@@ -185,6 +194,7 @@ var loadState = {
 	 *	@function mainScreen
 	 */
 	mainScreen: function() {
+		
 		game.load.image('mainBackgroundScreen', '../assets/mainBackgroundScreen.png');
 		game.load.image('fullScreenButton', '../assets/fullScreenButton.png');
 		game.load.image('settingsButton', '../assets/settingsButton.png');
@@ -193,9 +203,10 @@ var loadState = {
 		game.load.image('skillButton', '../assets/skillButton.png');
 		game.load.image('inventoryButton', '../assets/inventoryButton.png');
 		game.load.image('rankButton', '../assets/rankButton.png');
-		game.load.image('characterButton', '../assets/characterButton.png')
-		game.load.image('tradeButton', '../assets/tradeButton.png')
-		game.load.image('craftButton', '../assets/craftButton.png')
+		game.load.image('characterButton', '../assets/characterButton.png');
+		game.load.image('tradeButton', '../assets/tradeButton.png');
+		game.load.image('craftButton', '../assets/craftButton.png');
+		
 	}, // End of loadState.mainScreen.
 	
 	/**
@@ -205,9 +216,11 @@ var loadState = {
 	 *	@function settingsScreen
 	 */
 	settingsScreen: function(){
+		
 		game.load.image('settingsBackgroundScreen', '../assets/settingsBackgroundScreen.png');
 		game.load.image('backButton', '../assets/backButton.png');
 		game.load.image('exitGameButton', '../assets/exitGameButton.png');
+		
 	}, // End of loadState.settingsScreen.
 	
 	/**
@@ -217,7 +230,9 @@ var loadState = {
 	 *	@function chatScreen
 	 */
 	chatScreen: function(){
-		game.load.image('sendButton', '../assets/sendButton.png')
+		
+		game.load.image('sendButton', '../assets/sendButton.png');
+		
 	}, // End of loadState.chatScreen.
 	
 	/**
@@ -227,7 +242,9 @@ var loadState = {
 	 *	@function skillScreen
 	 */
 	skillScreen: function(){
+		
 		game.load.image('skillBackgroundScreen', '../assets/skillBackgroundScreen.png');
+		
 	}, // End of loadState.skillScreen.
 	
 	/**
@@ -237,7 +254,9 @@ var loadState = {
 	 *	@function inventoryScreen
 	 */
 	inventoryScreen: function(){
+		
 		game.load.image('inventoryBackgroundScreen', '../assets/inventoryBackgroundScreen.png');
+		
 	}, // End of loadState.inventoryScreen.
 	
 	/**
@@ -247,7 +266,9 @@ var loadState = {
 	 *	@function matchScreen
 	 */
 	matchScreen: function(){
+		
 		game.load.image('matchBackgroundScreen', '../assets/matchBackgroundScreen.png');
+		
 	}, // End of loadState.matchScreen.
 	
 	/**
@@ -257,7 +278,9 @@ var loadState = {
 	 *	@function tradeScreen
 	 */
 	tradeScreen: function(){
+		
 		game.load.image('tradeBackgroundScreen', '../assets/tradeBackgroundScreen.png');
+		
 	}, // End of loadState.tradeScreen.
 	
 	/**
@@ -267,7 +290,9 @@ var loadState = {
 	 *	@function craftScreen
 	 */
 	craftScreen: function(){
+		
 		game.load.image('craftBackgroundScreen', '../assets/craftBackgroundScreen.png');
+		
 	}, // End of loadState.craftScreen.
 	
 	/**
@@ -277,7 +302,9 @@ var loadState = {
 	 *	@function rankScreen
 	 */
 	rankScreen: function(){
+		
 		game.load.image('rankBackgroundScreen', '../assets/rankBackgroundScreen.png');
+		
 	}, // End of loadState.rankScreen.
 	
 	/**
@@ -287,8 +314,10 @@ var loadState = {
 	 *	@function characterScreen
 	 */
 	characterScreen: function(){
+		
 		game.load.image('characterBackgroundScreen', '../assets/characterBackgroundScreen.png');
 		game.load.image('exitButton', '../assets/exitButton.png');
+		
 	},// End of loadState.characterScreen.
 	
 } // End of loadState
