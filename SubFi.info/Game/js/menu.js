@@ -91,8 +91,9 @@ var menuState = {
 	/**
 	 *
 	 */
-		console.log('Out')
+		
 	moveOut: function(){
+		console.log('Out')
 		// game.add.tween(groupName).to( {alpha: 0}, bootState.speed,  "Linear", true)
 	},
 	/**
