@@ -19,7 +19,7 @@ var chatState = {
 		enterKey.onDown.add(chatState.sendMessage, this);
 		socket = io();
 		chatState.chatWindow();
-		socket.emit('chat message', bootState.user['username'] +' connected.');
+		socket.emit('chat message', bootState.user.username +' connected.');
 		cloth.focus('textInputField');
 		console.log('chatState Complete.'); // Remove upon release.
 	},
@@ -37,8 +37,7 @@ var chatState = {
 		}
 			
 		);
-	},
-	
+	},	
 	chatWindow: function(){
 		cloth.append(document.getElementsByTagName("canvas"), 'div', attrs={
 			'id' : 'chatFieldDiv'
@@ -46,10 +45,12 @@ var chatState = {
 		cloth.append('chatFieldDiv','ul', attrs={
 			'id':'globalChatField',
 			'overflow':'scroll',
+			
 		});
 		for(i=1;i<chatState.maxLI+1;i++){
 			cloth.append('globalChatField','li',attrs={
 				'id' : 'chat_'+i,
+				'class' : 'htmlInputFields'
 			});
 		}
 		
@@ -57,12 +58,13 @@ var chatState = {
 			'id' : 'textInputField',
 			'type' : 'text',
 			'placeholder' : 'Type Here',
+			'maxlength' : '256'
 		});
 		
 		var sendButton = game.add.button(455, 687, 'sendButton', chatState.sendMessage, this, 2, 1, 0);
 	},
 	sendMessage: function(){
-		socket.emit('chat message', bootState.user['username'] +': '+cloth.retrieve('textInputField'));
+		socket.emit('chat message', bootState.user.username +': '+cloth.retrieve('textInputField'));
 		document.getElementById('textInputField').value = '';
 		
 	},

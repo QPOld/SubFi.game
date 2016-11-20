@@ -47,6 +47,7 @@ var forgotState = {
 			'id' : 'emailInputField',
 			'type' : 'text',
 			'placeholder' : 'Email',
+			'class' : 'htmlInputFields'
 		});
 		
 		// Phaser does not like html buttons.

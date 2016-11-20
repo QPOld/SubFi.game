@@ -48,21 +48,25 @@ var registerState = {
 			'id' : 'emailInputField',
 			'type' : 'text',
 			'placeholder' : 'Email',
+			'class' : 'htmlInputFields'
 		});
 		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'usernameInputField',
 			'type' : 'text',
 			'placeholder' : 'Username',
+			'class' : 'htmlInputFields'
 		});
 		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'passwordInputField',
 			'type' : 'password',
 			'placeholder' : 'Password',
+			'class' : 'htmlInputFields'
 		});
 		cloth.append('registerFieldDiv', 'input', attrs = {
 			'id' : 'passwordInputFieldCopy',
 			'type' : 'password',
 			'placeholder' : 'Password Again',
+			'class' : 'htmlInputFields'
 		});
 		
 		// Phaser does not like html buttons.

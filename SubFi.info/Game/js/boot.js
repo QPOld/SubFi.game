@@ -54,20 +54,6 @@ var bootState = {
 	 */
 	 user:{},
 	 
-	 /**
-	 *	@description Stores the open states for the menu of the connected user. 
-	 *
-	 *	@memberof bootState
-	 *
-	 *	@constant {object} states	
-	 */
-	states:{
-		chat:false,
-		character:false,
-		inventory:false,
-		rank:false
-	},
-	 
 	/**
 	 *	@description Stores the tween speed for state transitions.
 	 *

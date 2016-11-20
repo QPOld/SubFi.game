@@ -149,11 +149,12 @@ app.post('/register',function(req,res){
 		'kills':0,
 		'deaths':0,
 		'leaves':0,
-		'pvpflag':0,
+		'pvpflag':0, // 0 is menu 1 is finding 2 is in a match 4 is banned?
 		'matchID':'',
 		'orderID':0,
 		'findID':0,
-		'attempts':0
+		'attempts':0,
+		'logged':0
 		};
 	async.series([
 		function(callback){
@@ -207,13 +208,24 @@ app.post('/register',function(req,res){
 }); // End of /register.
 // Start server
 io.on('connection', function(socket){
-  console.log('connect');
-  socket.on('chat message',function(msg){
-	  io.emit('chat message', msg);
-  });
-  socket.on('disconnect', function(){
-	  console.log('disconnect');
-  });
+	
+	console.log('connect');
+
+	socket.on('chat message',function(msg){
+		io.emit('chat message', msg);
+	});
+
+	socket.on('find match',function(msg){
+		console.log(msg)
+	});
+	socket.on('in match',function(msg){
+		console.log(msg)
+	});
+
+	socket.on('disconnect', function(){
+		console.log('disconnect');
+	});
+  
 });
 server.listen(port, function() { 
     console.log("Server running at: http://localhost:" + port)

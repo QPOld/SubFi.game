@@ -56,16 +56,18 @@ var loginState = {
 			'id' : 'usernameInputField',
 			'type' : 'text',
 			'placeholder' : 'Username',
+			'class' : 'htmlInputFields'
 		});
 		cloth.append('loginFieldDiv', 'input', attrs = {
 			'id' : 'passwordInputField',
 			'type' : 'password',
 			'placeholder' : 'Password',
+			'class' : 'htmlInputFields'
 		});
 		
 		// Phaser does not like html buttons.
-		var submitButton = game.add.button(555, 360, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
-		var registerButton = game.add.button(651, 360, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
+		var submitButton = game.add.button(540, 360, 'submitButton', loginState.goToMenuScreen, this, 2, 1, 0);
+		var registerButton = game.add.button(665, 360, 'registerButton', loginState.goToRegisterScreen, this, 2, 1, 0);
 		var forgotButton = game.add.button(555, 417, 'forgotButton', loginState.goToForgotScreen, this, 2, 1, 0);
 		var exitProgramButton = game.add.button(1245,10,'exitProgramButton',loginState.goToExitScreen, this, 2, 1, 0);
 		var buttonGroup = game.add.group();
@@ -176,7 +178,7 @@ var loginState = {
 				cloth.value('usernameInputField','');
 				cloth.value('passwordInputField','');
 				
-				var text = game.add.text(735, 260, "Invalid Username or Password.",{ font: "17px Arial", fill: "#ff0044"});
+				var text = game.add.text(520, 600, "Invalid Username or Password.",{ font: "17px Arial", fill: "#ff0044"});
 				
 			}
 		});

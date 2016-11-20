@@ -8,9 +8,9 @@
   *	@namespace menuState
   */
 var menuState = {
-	inventoryGroup:'',
-	characterGroup:'',
-	/**
+	inventoryGroup:(function(){ var inventoryGroup; return inventoryGroup;})(),
+	characterGroup:(function(){ var characterGroup; return characterGroup;})(),
+	/** 
 	 *	@description Reserved name in Phaser.
 	 *
 	 *	@memberof menuState
@@ -19,9 +19,6 @@ var menuState = {
 	 */
 	create: function(){
 		menuState.getUserData();
-		menuState.menuScreen();
-		// menuState.recreateStates(bootState.states);
-		
 		
 		console.log('menuState Complete.'); //Remove upon release.
 		
@@ -45,30 +42,21 @@ var menuState = {
 		var height = bootState.height;
 		var mainBackgroundScreen = game.add.tileSprite(0, 0, width, height, 'mainBackgroundScreen');
 		var settingsButton = game.add.button(width - 72, 28, 'settingsButton',menuState.goToSettingsScreen , this, 2, 1, 0);
-		var chatButton = game.add.button(width - 360, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
+		var chatButton = game.add.button(width - 432, 28, 'chatButton', menuState.goToChatScreen, this, 2, 1, 0);
 		var skillButton = game.add.button(width - 144, 28, 'skillButton',menuState.goToSkillScreen, this, 2, 1, 0);
-		var inventoryButton = game.add.button(width - 504, 28, 'inventoryButton', menuState.moveIn, this, 2, 1, 0);
-		var characterButton = game.add.button(width - 576, 28, 'characterButton', menuState.moveIn, this, 2, 1, 0);
 		var tradeButton = game.add.button(width - 216, 28, 'tradeButton', menuState.goToTradeScreen, this, 2, 1, 0);
 		var craftButton = game.add.button(width - 288, 28, 'craftButton', menuState.goToCraftScreen, this, 2, 1, 0);
-		var rankButton = game.add.button(width - 432, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
+		var rankButton = game.add.button(width - 360, 28, 'rankButton', menuState.goToRankScreen, this, 2, 1, 0);
 		var matchButton = game.add.button(15, 15, 'matchButton', menuState.goToMatchScreen, this, 2, 1, 0);
 		
-		
 		var inventoryBackgroundScreen = game.add.sprite(550,232,'inventoryBackgroundScreen');
-		var inventoryExitButton = game.add.button(1220, 237, 'exitButton',menuState.moveOut , this, 2, 1, 0);
-		
-		menuState.inventoryGroup.add(inventoryBackgroundScreen);
-		menuState.inventoryGroup.add(inventoryExitButton);
-		menuState.inventoryGroup.alpha = 0
-		
 		
 		var characterBackgroundScreen = game.add.sprite(0,225,'characterBackgroundScreen');
-		var characterExitButton = game.add.button(470, 230, 'exitButton',menuState.moveOut , this, 2, 1, 0);
 		
-		menuState.characterGroup.add(characterBackgroundScreen);
-		menuState.characterGroup.add(characterExitButton);
-		menuState.characterGroup.alpha = 0
+		console.log(bootState.user)
+		var style = { font: "32px Arial", fill: "#000000" };
+
+		var text = game.add.text(230, 15, 'Welcome back ' + bootState.user.username + '!', style);
 	},
 	
 	/**
@@ -82,42 +70,10 @@ var menuState = {
 	 *	@todo Create an extensive error handling function. This type of function will be used in every screen.
 	 */
 	getUserData: function(){
-		data.Get('/retrieve?id='+bootState.user['username'], function(data){
+		data.Get('/retrieve?id='+bootState.user.username, function(data){
 				bootState.user = JSON.parse(data)[0];
-				// menuState.menuScreen();
+				menuState.menuScreen();
 			});
-	},
-	
-	/**
-	 *
-	 */
-		
-	moveOut: function(){
-		console.log('Out')
-		// game.add.tween(groupName).to( {alpha: 0}, bootState.speed,  "Linear", true)
-	},
-	/**
-	 *
-	 */
-	moveIn: function(){
-		console.log('In')
-		// game.add.tween(groupName).to( {alpha: 1}, bootState.speed,  "Linear", true)
-	},
-	
-	/**
-	 *
-	 */
-	recreateStates:function(states){
-		cloth.remove('chatFieldDiv');
-		for (var key in states) {
-			if(states[key] === true){
-				console.log(key,states[key])
-				// game.add.tween(key+'BackgroundScreen').to( {x: 2000}, bootState.speed,  "Linear", true)
-				game.state.start(key, Phaser.Plugin.StateTransition.Out.FadeBottom, Phaser.Plugin.StateTransition.In.FadeTop, false, false)
-				
-				
-			}
-		}
 	},
 	
 	/**
@@ -135,12 +91,10 @@ var menuState = {
 	goToChatScreen: function(){
 		/** @see chat.js*/
 		if(!document.getElementById('chatFieldDiv')){
-			bootState.states.chat = true;
 			game.state.start('chat', '', '', false,false);
 		} else {
-			bootState.states.chat = false;
+			cloth.remove('chatFieldDiv');
 			game.state.start('menu');
-			// menuState.recreateStates(bootState.states)
 		}
 	},
 	
@@ -155,14 +109,6 @@ var menuState = {
 	/**
 	 *
 	 */
-	goToInventoryScreen: function(){
-		bootState.states.inventory = true;
-		game.state.start('inventory',Phaser.Plugin.StateTransition.Out.FadeBottom, Phaser.Plugin.StateTransition.In.FadeTop,false,false);
-	},
-	
-	/**
-	 *
-	 */
 	goToMatchScreen: function(){
 		cloth.remove('chatFieldDiv');
 		game.state.start('match');
@@ -172,16 +118,8 @@ var menuState = {
 	 *
 	 */
 	goToRankScreen: function(){
-		bootState.states.rank = true;
-		game.state.start('rank',Phaser.Plugin.StateTransition.Out.FadeTop, Phaser.Plugin.StateTransition.In.FadeBottom,false,false);
-	},
-	
-	/**
-	 *
-	 */
-	goToCharacterScreen: function(){
-		bootState.states.character = true;
-		game.state.start('character',Phaser.Plugin.StateTransition.Out.FadeRight, Phaser.Plugin.StateTransition.In.FadeLeft,false,false);
+		cloth.remove('chatFieldDiv');
+		game.state.start('rank');
 	},
 	
 	/**
